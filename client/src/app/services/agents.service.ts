@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import Swal from 'sweetalert2';
 import { Item } from '../models/items.model';
 import { StandartResponse } from '../models/response.model';
 import { TriggerAssignment } from '../models/triggers.model';
+import { AlertsService } from './alerts.service';
 
 
 export interface Agent {
@@ -28,18 +30,29 @@ export interface Agent {
 })
 export class AgentsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private alerts : AlertsService) { }
 
   async getAgents(): Promise<Agent[]>{
     console.log("Fetching all agents from backend")
-    var resp = await this.http.get<StandartResponse>("/api/v1/agent").toPromise()
+    try{
+      var resp = await this.http.get<StandartResponse>("/api/v1/agent").toPromise()
 
-    if (resp.Status == "OK"){
-      return resp.Payload as Agent[]
+      if (resp.Status == "OK"){
+        return resp.Payload as Agent[]
+      }
+
+      this.alerts.DisplayGenericError("Couldn't retrieve agents from server. Got:" + resp.Status)
+
+    }catch(exception){
+      let errorMessage = "Unknown error"
+
+      if (exception instanceof HttpErrorResponse){
+        const httpException = exception as HttpErrorResponse
+        errorMessage = httpException.message
+      }
+
+      this.alerts.DisplayGenericError(errorMessage)
     }
-
-    console.error("Couldn't retrieve agents from server. Got:" + resp.Status)
     return [];
   }
-
 }

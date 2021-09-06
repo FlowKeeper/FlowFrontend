@@ -20,7 +20,8 @@ export class AppComponent implements OnInit{
   constructor(private breakpointObserver: BreakpointObserver, private agentService: AgentsService) {}
 
   async ngOnInit() {
-    
+    let agents = await this.agentService.getAgents()
+
   }
 
 }
