@@ -11,11 +11,22 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './sites/dashboard/dashboard.component';
+import { AgentsComponent } from './sites/agents/agents.component';
+import { TemplatesComponent } from './sites/templates/templates.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
+    AgentsComponent,
+    TemplatesComponent,
   ],
   imports: [
     HttpClientModule,
@@ -27,7 +38,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
