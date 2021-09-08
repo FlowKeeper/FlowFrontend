@@ -18,6 +18,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatTableModule} from '@angular/material/table';
+
 
 
 
@@ -44,7 +46,8 @@ import { MatMenuModule } from '@angular/material/menu';
       echarts: () => import('echarts')
     }),
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

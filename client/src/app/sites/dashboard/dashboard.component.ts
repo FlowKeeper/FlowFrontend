@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import * as echarts from 'echarts';
+import { Agent, AgentsService } from 'src/app/services/agents.service';
+import { TriggerAgentMapping, TriggerAssignment } from 'src/app/models/triggers.model';
 
 
 @Component({
@@ -10,8 +12,25 @@ import * as echarts from 'echarts';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  problemsDataSource: TriggerAgentMapping[] = []
+  problemsDisplayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol'];
 
-  ngOnInit(): void {
+  constructor(private agentService : AgentsService) { }
+
+  async ngOnInit() {
+    let agents = await this.agentService.getAgents()
+
+    agents.forEach(element => {
+      element.Triggers.forEach(trigger => {
+        if (trigger.Problematic){
+          let mapping: TriggerAgentMapping = {
+            Agent: element,
+            Trigger: trigger.Trigger
+          }
+
+          this.problemsDataSource.push()
+        }
+      });
+    });
   }
 }

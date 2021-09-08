@@ -1,3 +1,5 @@
+import { Agent } from "../services/agents.service";
+
 export interface TriggerAssignment {
     Enabled: boolean;
     TriggerID: string;
@@ -13,4 +15,9 @@ export interface Trigger {
     Severity: number;
     DependsOn: string[];
     Expression: string;
+}
+
+export interface TriggerAgentMapping{
+    Agent: Agent;
+    Trigger: Trigger;
 }

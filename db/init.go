@@ -37,3 +37,7 @@ func Connect() error {
 	logger.Info(loggingArea, "DB subsystem is ready")
 	return nil
 }
+
+func Client() *mongo.Database {
+	return dbclient
+}
