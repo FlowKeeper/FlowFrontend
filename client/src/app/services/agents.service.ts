@@ -30,15 +30,24 @@ export interface Agent {
 })
 export class AgentsService {
 
-  constructor(private http: HttpClient, private alerts : AlertsService) { }
+  private agents: Agent[] = []
 
-  async getAgents(): Promise<Agent[]>{
+  constructor(private http: HttpClient, private alerts : AlertsService) {
+    this.fetchAgents()
+  }
+
+  getAgents(): Agent[]{
+    return this.agents
+  }
+
+  private async fetchAgents(){
     console.log("Fetching all agents from backend")
     try{
       var resp = await this.http.get<StandartResponse>("/api/v1/agent").toPromise()
 
       if (resp.Status == "OK"){
-        return resp.Payload as Agent[]
+        this.agents = resp.Payload as Agent[];
+        return
       }
 
       this.alerts.DisplayGenericError("Couldn't retrieve agents from server. Got:" + resp.Status)

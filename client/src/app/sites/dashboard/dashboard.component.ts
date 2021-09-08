@@ -28,9 +28,11 @@ export class DashboardComponent implements OnInit {
             Trigger: trigger.Trigger
           }
 
-          this.problemsDataSource.push()
+          this.problemsDataSource.push(mapping)
         }
       });
     });
+
+    console.log("Discovered " + this.problemsDataSource.length + " problematic agents")
   }
 }
