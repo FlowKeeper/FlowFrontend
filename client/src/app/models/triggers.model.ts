@@ -12,7 +12,7 @@ export interface Trigger {
     ID: string;
     Name: string;
     Enabled: boolean;
-    Severity: number;
+    Severity: TriggerSeverity;
     DependsOn: string[];
     Expression: string;
 }
@@ -20,4 +20,11 @@ export interface Trigger {
 export interface TriggerAgentMapping{
     Agent: Agent;
     Trigger: Trigger;
+}
+
+export enum TriggerSeverity {
+    Info = 0,
+    Low ,
+    Medium,
+    High
 }

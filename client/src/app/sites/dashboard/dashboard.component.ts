@@ -1,8 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import * as echarts from 'echarts';
 import { Agent, AgentsService } from 'src/app/services/agents.service';
-import { TriggerAgentMapping, TriggerAssignment } from 'src/app/models/triggers.model';
+import { TriggerAgentMapping, TriggerAssignment, TriggerSeverity } from 'src/app/models/triggers.model';
+import { StandartResponse } from 'src/app/models/response.model';
+import { TriggerService } from 'src/app/services/trigger.service';
 
 
 @Component({
@@ -13,12 +15,19 @@ import { TriggerAgentMapping, TriggerAssignment } from 'src/app/models/triggers.
 export class DashboardComponent implements OnInit {
 
   problemsDataSource: TriggerAgentMapping[] = []
-  problemsDisplayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol'];
+  problemsDisplayedColumns: string[] = ['agent.name', 'trigger.name', 'trigger.description', 'trigger.severity'];
 
-  constructor(private agentService : AgentsService) { }
+  constructor(private agentService : AgentsService, public triggerService: TriggerService) { }
 
-  async ngOnInit() {
-    let agents = await this.agentService.getAgents()
+  ngOnInit() {
+    //Populate problems array
+    this.agentService.getAgents().subscribe((data: StandartResponse) => {
+      this.displayProblems(data.Payload as Agent[])
+    })
+  }
+
+  displayProblems(agents: Agent[]){
+    let newProblems: TriggerAgentMapping[] = []
 
     agents.forEach(element => {
       element.Triggers.forEach(trigger => {
@@ -28,11 +37,13 @@ export class DashboardComponent implements OnInit {
             Trigger: trigger.Trigger
           }
 
-          this.problemsDataSource.push(mapping)
+          newProblems.push(mapping)
         }
       });
     });
 
+    this.problemsDataSource = newProblems
     console.log("Discovered " + this.problemsDataSource.length + " problematic agents")
   }
+
 }
