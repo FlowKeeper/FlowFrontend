@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Item } from '../models/items.model';
 import { StandartResponse } from '../models/response.model';
@@ -34,6 +35,16 @@ export class AgentsService {
   constructor(private http: HttpClient, private alerts : AlertsService) {}
 
   getAgents(): Observable<StandartResponse>{
-    return this.http.get<StandartResponse>("/api/v1/agent")
+    return this.http.get<StandartResponse>("/api/v1/agent").pipe(
+      catchError((err, caught) => {
+        if (err instanceof HttpErrorResponse){
+          this.alerts.DisplayGenericError(err.message)
+        }else{
+          this.alerts.DisplayGenericError("Unknown error")
+        }
+
+        return throwError(err)
+      })
+    )
   }
 }
