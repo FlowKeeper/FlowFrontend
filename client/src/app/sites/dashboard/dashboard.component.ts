@@ -15,7 +15,7 @@ import { TriggerService } from 'src/app/services/trigger.service';
 export class DashboardComponent implements OnInit {
 
   problemsDataSource: TriggerAgentMapping[] = []
-  problemsDisplayedColumns: string[] = ['agent.name', 'trigger.name', 'trigger.description', 'trigger.severity'];
+  problemsDisplayedColumns: string[] = ['agent.name', 'trigger.name', 'trigger.description', 'trigger.severity', "trigger.starttime"];
 
   constructor(private agentService : AgentsService, public triggerService: TriggerService) { }
 
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
         if (trigger.Problematic){
           let mapping: TriggerAgentMapping = {
             Agent: element,
-            Trigger: trigger.Trigger
+            Assignment: trigger
           }
 
           newProblems.push(mapping)

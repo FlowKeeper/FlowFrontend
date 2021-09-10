@@ -6,6 +6,7 @@ export interface TriggerAssignment {
     Trigger: Trigger;
     Problematic: boolean;
     Error: string;
+    History: TriggerHistoryEvent[];
 }
 
 export interface Trigger {
@@ -19,7 +20,12 @@ export interface Trigger {
 
 export interface TriggerAgentMapping{
     Agent: Agent;
-    Trigger: Trigger;
+    Assignment: TriggerAssignment;
+}
+
+export interface TriggerHistoryEvent{
+    Time: Date;
+    Problematic: boolean;
 }
 
 export enum TriggerSeverity {
