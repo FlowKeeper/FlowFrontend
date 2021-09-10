@@ -15,7 +15,7 @@ export interface Agent {
     AgentUUID: string;
     Enabled: boolean;
     LastSeen: string;
-    OS: number;
+    OS: AgentOS;
     State: number;
     Items: string[];
     ItemsResolved: Item[];
@@ -25,6 +25,11 @@ export interface Agent {
         UUID: string;
         Lock: string;
     }
+}
+
+export enum AgentOS {
+  Windows = 0,
+  Linux
 }
 
 @Injectable({
@@ -46,5 +51,9 @@ export class AgentsService {
         return throwError(err)
       })
     )
+  }
+
+  agentosToString(os: AgentOS): string{
+    return AgentOS[os]
   }
 }
