@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@an
 import { EChartsOption } from 'echarts';
 import * as echarts from 'echarts';
 import { Agent, AgentsService } from 'src/app/services/agents.service';
-import { TriggerAgentMapping, TriggerAssignment, TriggerSeverity } from 'src/app/models/triggers.model';
+import { TriggerAgentMapping } from 'src/app/models/triggers.model';
 import { StandartResponse } from 'src/app/models/response.model';
 import { TriggerService } from 'src/app/services/trigger.service';
 
