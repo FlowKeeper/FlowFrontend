@@ -15,7 +15,7 @@ import (
 
 //GetAgents returns all agents from the database
 func GetAgents(w http.ResponseWriter, r *http.Request) {
-	agents, err := dbtemplate.GetAgents(db.Client())
+	agents, err := dbtemplate.GetAllAgents(db.Client())
 	if err != nil {
 		httpResponse.InternalError(w, r, err)
 		return

@@ -10,6 +10,7 @@ export enum AgentOS {
 export class Agent{
   ID: string;
   Name: string;
+  Description: string;
   AgentUUID: string;
   Enabled: boolean;
   LastSeen: string;
@@ -25,6 +26,7 @@ export class Agent{
   constructor(json: any){
       this.ID = json.ID;
       this.Name = json.Name;
+      this.Description = json.Description;
       this.AgentUUID = json.AgentUUID;
       this.Enabled = json.Enabled;
       this.LastSeen = json.LastSeen;
@@ -126,5 +128,31 @@ export class Agent{
       });
 
       return triggerOK;
+    }
+
+    compare(agent: Agent): { [key: string]: any }{
+      let changedMap: { [key: string]: any } = {};
+
+      if (this.Name !== agent.Name){
+        changedMap["name"] = agent.Name;
+      }
+
+      if (this.Description !== agent.Description){
+        changedMap["description"] = agent.Description;
+      }
+
+      if (this.Enabled !== agent.Enabled){
+        changedMap["enabled"] = agent.Enabled;
+      }
+
+      if (this.Templates !== agent.Templates){
+        changedMap["templates"] = agent.Templates;
+      }
+
+      if (this.Endpoint !== agent.Endpoint){
+        changedMap["endpoint"] = agent.Endpoint;
+      }
+
+      return changedMap;
     }
 }

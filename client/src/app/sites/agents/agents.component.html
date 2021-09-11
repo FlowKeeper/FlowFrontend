@@ -38,7 +38,7 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element" class="nobr">
-                <mat-icon aria-hidden="false" aria-label="Edit Agent" class="clickabbleIcon">edit</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Edit Agent" class="clickabbleIcon" (click)="openEditAgent(element)">edit</mat-icon>
                 <mat-icon aria-hidden="false" aria-label="Delete Agent" class="clickabbleIcon">delete</mat-icon>
             </td>
         </ng-container>

@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Edit Agent {{agent.Name}}</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="agent.Name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onAbortClick()">Abort</button>
+  <button mat-button [mat-dialog-close]="agent" cdkFocusInitial>Ok</button>
+</div>
