@@ -14,6 +14,6 @@ export class AlertsService {
       title: "Oops...",
       text: "Something went wrong!",
       footer: Error
-  })
+    });
   }
 }

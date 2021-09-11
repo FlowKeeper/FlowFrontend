@@ -27,12 +27,12 @@ export class DashboardComponent implements OnInit {
       let rawAgents = data.Payload as Agent[];
 
       rawAgents.forEach((element) => {
-        newAgentArray.push(new Agent(element))
+        newAgentArray.push(new Agent(element));
       });
 
       this.agents = newAgentArray;
 
-      this.displayProblems()
+      this.displayProblems();
     });
   }
 

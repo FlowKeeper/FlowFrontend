@@ -25,7 +25,7 @@ export class AgentsService {
           this.alerts.displayGenericError("Unknown error");
         }
 
-        return throwError(err)
+        return throwError(err);
       })
     );
   }

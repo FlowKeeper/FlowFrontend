@@ -26,7 +26,7 @@ export class Trigger {
     }
 
     severityToString(): string {
-        return TriggerSeverity[this.Severity]
+        return TriggerSeverity[this.Severity];
     }
 
     severityToColor(): string{

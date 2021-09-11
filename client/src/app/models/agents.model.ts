@@ -53,7 +53,7 @@ export class Agent{
     getAllItems(): Item[]{
       let items: Item[] = [];
       this.Templates.forEach((template) => {
-        template.Items.forEach(item => {
+        template.Items.forEach((item) => {
           if (!items.includes(item)){
             items.push(item);
           }
@@ -115,9 +115,9 @@ export class Agent{
 
     //This function returns the amount of ok triggers for an agent
     unproblematicTriggers(agent: Agent): number{
-      let triggerOK = 0
+      let triggerOK = 0;
       this.getAllTriggers().forEach((element) => {
-        let tm = this.getTriggerMappingForTrigger(element.ID)
+        let tm = this.getTriggerMappingForTrigger(element.ID);
         if (typeof tm !== undefined){
           if (!tm?.Problematic){
             triggerOK++;
