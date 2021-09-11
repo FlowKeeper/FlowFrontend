@@ -32,7 +32,7 @@ jobs:
         node-version: 16
 
     - name: Test Frontend
-      run: npm install && npx ng test --watch=false --browsers=ChromeHeadlessCustom
+      run: npm install && npx ng test --watch=false --browsers=ChromeHeadless
       working-directory: ./client
 
     - name: Set up QEMU
