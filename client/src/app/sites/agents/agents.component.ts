@@ -1,7 +1,8 @@
 import { trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Agent } from 'src/app/models/agents.model';
 import { StandartResponse } from 'src/app/models/response.model';
-import { Agent, AgentsService } from 'src/app/services/agents.service';
+import { AgentsService } from 'src/app/services/agents.service';
 
 @Component({
   selector: 'app-agents',
@@ -25,9 +26,12 @@ export class AgentsComponent implements OnInit {
   //This function returns the amount of problematic triggers for an agent
   problematicTriggers(agent: Agent): number{
     let triggerProblematic = 0
-    agent.Triggers.forEach(element => {
-      if (element.Problematic){
-        triggerProblematic++
+    this.agentService.getAllTriggers(agent).forEach(element => {
+      let tm = this.agentService.getTriggerMappingForTrigger(agent, element)
+      if (typeof tm !== undefined){
+        if (tm?.Problematic){
+          triggerProblematic++
+        }
       }
     });
 
@@ -37,9 +41,12 @@ export class AgentsComponent implements OnInit {
   //This function returns the amount of ok triggers for an agent
   okTriggers(agent: Agent): number{
     let triggerOK = 0
-    agent.Triggers.forEach(element => {
-      if (!element.Problematic){
-        triggerOK++
+    this.agentService.getAllTriggers(agent).forEach(element => {
+      let tm = this.agentService.getTriggerMappingForTrigger(agent, element)
+      if (typeof tm !== undefined){
+        if (!tm?.Problematic){
+          triggerOK++
+        }
       }
     });
 

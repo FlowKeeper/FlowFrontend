@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import * as echarts from 'echarts';
-import { Agent, AgentsService } from 'src/app/services/agents.service';
+import { AgentsService } from 'src/app/services/agents.service';
 import { TriggerAgentMapping } from 'src/app/models/triggers.model';
 import { StandartResponse } from 'src/app/models/response.model';
 import { TriggerService } from 'src/app/services/trigger.service';
+import { Agent } from 'src/app/models/agents.model';
 
 
 @Component({
@@ -30,14 +31,17 @@ export class DashboardComponent implements OnInit {
     let newProblems: TriggerAgentMapping[] = []
 
     agents.forEach(element => {
-      element.Triggers.forEach(trigger => {
-        if (trigger.Problematic){
-          let mapping: TriggerAgentMapping = {
-            Agent: element,
-            Assignment: trigger
-          }
+      this.agentService.getAllTriggers(element).forEach(trigger => {
+        let tm = this.agentService.getTriggerMappingForTrigger(element,trigger)
+        if (tm !== undefined){
+          if (tm.Problematic){
+            let mapping: TriggerAgentMapping = {
+              Agent: element,
+              Assignment: tm
+            }
 
-          newProblems.push(mapping)
+            newProblems.push(mapping)
+          }
         }
       });
     });

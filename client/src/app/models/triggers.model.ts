@@ -1,9 +1,8 @@
-import { Agent } from "../services/agents.service";
+import { Agent } from "./agents.model";
 
 export interface TriggerAssignment {
     Enabled: boolean;
     TriggerID: string;
-    Trigger: Trigger;
     Problematic: boolean;
     Error: string;
     History: TriggerHistoryEvent[];
