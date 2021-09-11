@@ -15,7 +15,7 @@ require (
 	github.com/xdg-go/stringprep v1.0.2 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20181117223130-1be2e3e5546d // indirect
 	gitlab.cloud.spuda.net/Wieneo/golangutils/v2 v2.0.0-20210904070203-2654d8b0c701
-	gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911042018-ba4f6a4879c9
+	gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911053835-78cec638e9b2
 	go.mongodb.org/mongo-driver v1.7.2
 	golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073 // indirect
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e // indirect

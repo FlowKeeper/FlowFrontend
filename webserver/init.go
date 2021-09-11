@@ -21,6 +21,8 @@ func Init() {
 	router.Use(loggingMiddleware)
 
 	router.HandleFunc("/api/v1/agent", endpoints.GetAgents).Methods("GET")
+	router.HandleFunc("/api/v1/template", endpoints.GetTemplates).Methods("GET")
+	router.HandleFunc("/api/v1/template", endpoints.CreateTemplate).Methods("POST")
 
 	srv := &http.Server{
 		Handler:      router,
