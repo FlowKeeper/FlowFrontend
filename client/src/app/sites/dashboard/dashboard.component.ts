@@ -4,7 +4,6 @@ import * as echarts from 'echarts';
 import { AgentsService } from 'src/app/services/agents.service';
 import { TriggerAgentMapping } from 'src/app/models/triggers.model';
 import { StandartResponse } from 'src/app/models/response.model';
-import { TriggerService } from 'src/app/services/trigger.service';
 import { Agent } from 'src/app/models/agents.model';
 
 
@@ -19,7 +18,7 @@ export class DashboardComponent implements OnInit {
   problemsDataSource: TriggerAgentMapping[] = []
   problemsDisplayedColumns: string[] = ['agent.name', 'trigger.name', 'trigger.description', 'trigger.severity', "trigger.starttime"];
 
-  constructor(public agentService : AgentsService, public triggerService: TriggerService) { }
+  constructor(public agentService : AgentsService) { }
 
   ngOnInit() {
     //Populate problems array

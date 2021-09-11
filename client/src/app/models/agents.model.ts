@@ -36,6 +36,12 @@ export class Agent{
         Lock: json.Scraper.Lock,
         UUID: json.Scraper.UUID
       }
+
+      this.Templates.forEach((template,index) => {
+        template.Triggers.forEach((trigger, triggerIndex) => {
+          this.Templates[index].Triggers[triggerIndex] = new Trigger(trigger)
+        });
+      });
     }
 
 
