@@ -32,7 +32,7 @@ jobs:
         node-version: 16
 
     - name: Test Frontend
-      run: npx ng test --watch=false --browsers=ChromeHeadlessCustom
+      run: npm install && npx ng test --watch=false --browsers=ChromeHeadlessCustom
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
