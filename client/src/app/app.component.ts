@@ -11,6 +11,8 @@ import { AgentsService } from './services/agents.service';
 })
 export class AppComponent implements OnInit{
 
+  title = "FlowKeeper"
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
