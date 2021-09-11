@@ -33,6 +33,7 @@ jobs:
 
     - name: Test Frontend
       run: npm install && npx ng test --watch=false --browsers=ChromeHeadlessCustom
+      working-directory: ./client
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
