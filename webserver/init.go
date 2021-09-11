@@ -27,6 +27,8 @@ func Init() {
 
 	router.HandleFunc("/api/v1/item", endpoints.CreateItem).Methods("POST")
 
+	router.HandleFunc("/api/v1/trigger", endpoints.CreateTrigger).Methods("POST")
+
 	srv := &http.Server{
 		Handler:      router,
 		Addr:         listenString,
