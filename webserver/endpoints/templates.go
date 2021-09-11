@@ -161,7 +161,7 @@ func AddItemToTemplate(w http.ResponseWriter, r *http.Request) {
 
 	for _, k := range template.ItemIDs {
 		if sliceContainsObjectID(newItems, k) {
-			httpResponse.UserError(w, 400, "The following item is already linked to the template:"+k.Hex())
+			httpResponse.UserError(w, 400, "The following item is already linked to the template: "+k.Hex())
 			return
 		}
 	}
@@ -250,7 +250,7 @@ func AddTriggerToTemplate(w http.ResponseWriter, r *http.Request) {
 
 	for _, k := range template.TriggerIDs {
 		if sliceContainsObjectID(newTriggers, k) {
-			httpResponse.UserError(w, 400, "The following trigger is already linked to the template:"+k.Hex())
+			httpResponse.UserError(w, 400, "The following trigger is already linked to the template: "+k.Hex())
 			return
 		}
 	}

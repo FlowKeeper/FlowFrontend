@@ -104,6 +104,10 @@ gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911055423-04be986e257
 gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911055423-04be986e2579/go.mod h1:3NcglY+n1LbSd7ntEO/X9iYm+ZC7Kx+rzm/HSgc56Hk=
 gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911064803-a4f970df1a6d h1:dn65Zj0hr8/W+TIyGZxyF1DBOEk5xrurT0WQudRevQg=
 gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911064803-a4f970df1a6d/go.mod h1:3NcglY+n1LbSd7ntEO/X9iYm+ZC7Kx+rzm/HSgc56Hk=
+gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911081220-360790d179b3 h1:yURIvs4u7amc68HtiXvMmWjq/HxzvOyMdu1nG70iEiE=
+gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911081220-360790d179b3/go.mod h1:3NcglY+n1LbSd7ntEO/X9iYm+ZC7Kx+rzm/HSgc56Hk=
+gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911082017-a077151195c2 h1:THtnGKYa92XTjOxmD4/qrVBbblqO4pdjm0tOySJS9hg=
+gitlab.cloud.spuda.net/flowkeeper/flowutils/v2 v2.0.0-20210911082017-a077151195c2/go.mod h1:3NcglY+n1LbSd7ntEO/X9iYm+ZC7Kx+rzm/HSgc56Hk=
 go.mongodb.org/mongo-driver v1.7.1/go.mod h1:Q4oFMbo1+MSNqICAdYMlC/zSTrwCogR4R8NzkI+yfU8=
 go.mongodb.org/mongo-driver v1.7.2 h1:pFttQyIiJUHEn50YfZgC9ECjITMT44oiN36uArf/OFg=
 go.mongodb.org/mongo-driver v1.7.2/go.mod h1:Q4oFMbo1+MSNqICAdYMlC/zSTrwCogR4R8NzkI+yfU8=

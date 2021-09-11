@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { TriggerSeverity } from '../models/triggers.model';
+import { Trigger, TriggerSeverity } from '../models/triggers.model';
 
 @Injectable({
   providedIn: 'root'

@@ -21,6 +21,7 @@ func Init() {
 	router.Use(loggingMiddleware)
 
 	router.HandleFunc("/api/v1/agent", endpoints.GetAgents).Methods("GET")
+	router.HandleFunc("/api/v1/agent/{[0-9][a-z]{*}}/templates", endpoints.AddTemplateToAgent).Methods("PUT")
 
 	router.HandleFunc("/api/v1/template", endpoints.GetTemplates).Methods("GET")
 	router.HandleFunc("/api/v1/template", endpoints.CreateTemplate).Methods("POST")

@@ -19,19 +19,19 @@
 
         <ng-container matColumnDef="agent.os">
             <th mat-header-cell *matHeaderCellDef> OS </th>
-            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{this.agentService.agentosToString(element.OS)}}</span> </td>
+            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{element.agentosToString()}}</span> </td>
         </ng-container>
 
         <ng-container matColumnDef="agent.items">
             <th mat-header-cell *matHeaderCellDef> Items </th>
-            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{this.agentService.getAllItems(element).length}}</span> </td>
+            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{element.getAllItems().length}}</span> </td>
         </ng-container>
 
         <ng-container matColumnDef="agent.triggers">
             <th mat-header-cell *matHeaderCellDef> Triggers </th>
             <td mat-cell *matCellDef="let element">
                 <span class="standartCell" title="Triggers total (OK / Problematic)">
-                    <span style="color: #3f51b5; font-weight: bold;">{{this.agentService.getAllTriggers(element).length}}</span> (<span style="color: green;">{{this.okTriggers(element)}}</span> / <span style="color: red;">{{this.problematicTriggers(element)}}</span>)
+                    <span style="color: #3f51b5; font-weight: bold;">{{element.getAllTriggers().length}}</span> (<span style="color: green;">{{element.unproblematicTriggers()}}</span> / <span style="color: red;">{{element.problematicTriggers()}}</span>)
                 </span></td>
         </ng-container>
 

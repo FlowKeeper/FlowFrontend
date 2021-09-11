@@ -18,39 +18,16 @@ export class AgentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.agentService.getAgents().subscribe((data: StandartResponse) => {
-      this.agents = data.Payload as Agent[]
+      let newAgentArray: Agent[] = []
+      let rawAgents = data.Payload as Agent[]
+
+      rawAgents.forEach(element => {
+        newAgentArray.push(new Agent(element))
+      });
+
+      this.agents = newAgentArray
       console.log("Got " + this.agents.length + " agent(s)")
     })
-  }
-
-  //This function returns the amount of problematic triggers for an agent
-  problematicTriggers(agent: Agent): number{
-    let triggerProblematic = 0
-    this.agentService.getAllTriggers(agent).forEach(element => {
-      let tm = this.agentService.getTriggerMappingForTrigger(agent, element)
-      if (typeof tm !== undefined){
-        if (tm?.Problematic){
-          triggerProblematic++
-        }
-      }
-    });
-
-    return triggerProblematic
-  }
-
-  //This function returns the amount of ok triggers for an agent
-  okTriggers(agent: Agent): number{
-    let triggerOK = 0
-    this.agentService.getAllTriggers(agent).forEach(element => {
-      let tm = this.agentService.getTriggerMappingForTrigger(agent, element)
-      if (typeof tm !== undefined){
-        if (!tm?.Problematic){
-          triggerOK++
-        }
-      }
-    });
-
-    return triggerOK
   }
 
 }

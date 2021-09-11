@@ -29,48 +29,4 @@ export class AgentsService {
       })
     )
   }
-
-  agentosToString(os: AgentOS): string{
-    return AgentOS[os]
-  }
-
-  getAllItems(Agent: Agent): Item[]{
-    let items: Item[] = []
-    Agent.Templates.forEach(template => {
-      template.Items.forEach(item => {
-        if (!items.includes(item)){
-          items.push(item)
-        }
-      });
-    });
-
-    return items
-  }
-
-  getAllTriggers(Agent: Agent): Trigger[]{
-    let triggers: Trigger[] = []
-    Agent.Templates.forEach(template => {
-      template.Triggers.forEach(trigger => {
-        if (!triggers.includes(trigger)){
-          triggers.push(trigger)
-        }
-      });
-    });
-
-    return triggers
-  }
-
-  getTriggerMappingForTrigger(Agent: Agent, Trigger: Trigger): TriggerAssignment | undefined{
-    var tm: TriggerAssignment | undefined = undefined;
-    Agent.TriggerMappings.forEach(element => {
-      if (element.TriggerID == Trigger.ID){
-        tm = element
-      }
-    });
-
-    if (tm === undefined){
-      console.log("Trigger assignments seem to be inconsistent. Didn't find assignment for trigger " + Trigger.ID)
-    }
-    return tm
-  }
 }

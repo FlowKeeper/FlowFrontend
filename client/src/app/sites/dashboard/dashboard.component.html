@@ -9,17 +9,17 @@
 
         <ng-container matColumnDef="trigger.name">
             <th mat-header-cell *matHeaderCellDef> Trigger </th>
-            <td mat-cell *matCellDef="let element"> {{element.Assignment.Trigger.Name}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.Agent.getTriggerByID(element.Assignment.TriggerID).Name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="trigger.description">
             <th mat-header-cell *matHeaderCellDef> Trigger Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.Assignment.Trigger.Description}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.Agent.getTriggerByID(element.Assignment.TriggerID).Description}} </td>
         </ng-container>
 
         <ng-container matColumnDef="trigger.severity">
             <th mat-header-cell *matHeaderCellDef> Severity </th>
-            <td mat-cell *matCellDef="let element"> {{this.triggerService.triggerSeverityToString(element.Assignment.Trigger.Severity)}} </td>
+            <td mat-cell *matCellDef="let element"> {{this.triggerService.triggerSeverityToString(element.Agent.getTriggerByID(element.Assignment.TriggerID).Severity)}} </td>
         </ng-container>
 
         <ng-container matColumnDef="trigger.starttime">
@@ -28,6 +28,6 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="problemsDisplayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: problemsDisplayedColumns;" [style.background-color]="this.triggerService.triggerSeverityToColor(row.Assignment.Trigger.Severity)"></tr>
+        <tr mat-row *matRowDef="let row; columns: problemsDisplayedColumns;" [style.background-color]="this.triggerService.triggerSeverityToColor(row.Agent.getTriggerByID(row.Assignment.TriggerID).Severity)"></tr>
     </table>
 </div>

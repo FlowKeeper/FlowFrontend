@@ -14,25 +14,35 @@ import { Agent } from 'src/app/models/agents.model';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  agents: Agent[] = []
 
   problemsDataSource: TriggerAgentMapping[] = []
   problemsDisplayedColumns: string[] = ['agent.name', 'trigger.name', 'trigger.description', 'trigger.severity', "trigger.starttime"];
 
-  constructor(private agentService : AgentsService, public triggerService: TriggerService) { }
+  constructor(public agentService : AgentsService, public triggerService: TriggerService) { }
 
   ngOnInit() {
     //Populate problems array
     this.agentService.getAgents().subscribe((data: StandartResponse) => {
-      this.displayProblems(data.Payload as Agent[])
+      let newAgentArray: Agent[] = []
+      let rawAgents = data.Payload as Agent[]
+
+      rawAgents.forEach(element => {
+        newAgentArray.push(new Agent(element))
+      });
+
+      this.agents = newAgentArray
+
+      this.displayProblems()
     })
   }
 
-  displayProblems(agents: Agent[]){
+  displayProblems(){
     let newProblems: TriggerAgentMapping[] = []
 
-    agents.forEach(element => {
-      this.agentService.getAllTriggers(element).forEach(trigger => {
-        let tm = this.agentService.getTriggerMappingForTrigger(element,trigger)
+    this.agents.forEach(element => {
+      element.getAllTriggers().forEach(trigger => {
+        let tm = element.getTriggerMappingForTrigger(trigger.ID)
         if (tm !== undefined){
           if (tm.Problematic){
             let mapping: TriggerAgentMapping = {
