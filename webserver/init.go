@@ -24,6 +24,8 @@ func Init() {
 
 	router.HandleFunc("/api/v1/template", endpoints.GetTemplates).Methods("GET")
 	router.HandleFunc("/api/v1/template", endpoints.CreateTemplate).Methods("POST")
+	router.HandleFunc("/api/v1/template/{[0-9][a-z]{*}}/items", endpoints.AddItemToTemplate).Methods("PUT")
+	router.HandleFunc("/api/v1/template/{[0-9][a-z]{*}}/triggers", endpoints.AddTriggerToTemplate).Methods("PUT")
 
 	router.HandleFunc("/api/v1/item", endpoints.CreateItem).Methods("POST")
 
