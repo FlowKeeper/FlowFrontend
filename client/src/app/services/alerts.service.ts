@@ -8,7 +8,7 @@ export class AlertsService {
 
   constructor() { }
 
-  DisplayGenericError(Error: string){
+  displayGenericError(Error: string){
     Swal.fire({
       icon: "error",
       title: "Oops...",

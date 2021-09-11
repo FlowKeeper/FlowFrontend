@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     //Populate problems array
     this.agentService.getAgents().subscribe((data: StandartResponse) => {
-      let newAgentArray: Agent[] = []
-      let rawAgents = data.Payload as Agent[]
+      let newAgentArray: Agent[] = [];
+      let rawAgents = data.Payload as Agent[];
 
       rawAgents.forEach((element) => {
         newAgentArray.push(new Agent(element))
@@ -33,15 +33,15 @@ export class DashboardComponent implements OnInit {
       this.agents = newAgentArray;
 
       this.displayProblems()
-    })
+    });
   }
 
   displayProblems(){
-    let newProblems: TriggerAgentMapping[] = []
+    let newProblems: TriggerAgentMapping[] = [];
 
     this.agents.forEach((element) => {
       element.getAllTriggers().forEach((trigger) => {
-        let tm = element.getTriggerMappingForTrigger(trigger.ID)
+        let tm = element.getTriggerMappingForTrigger(trigger.ID);
         if (tm !== undefined){
           if (tm.Problematic){
             let mapping: TriggerAgentMapping = {
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
               Assignment: tm
             };
 
-            newProblems.push(mapping)
+            newProblems.push(mapping);
           }
         }
       });

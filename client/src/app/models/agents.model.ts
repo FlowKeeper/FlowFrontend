@@ -52,79 +52,79 @@ export class Agent{
 
     getAllItems(): Item[]{
       let items: Item[] = [];
-      this.Templates.forEach(template => {
+      this.Templates.forEach((template) => {
         template.Items.forEach(item => {
           if (!items.includes(item)){
-            items.push(item)
+            items.push(item);
           }
         });
       });
 
-      return items
+      return items;
     }
 
     getAllTriggers(): Trigger[]{
-      let triggers: Trigger[] = []
-      this.Templates.forEach(template => {
-        template.Triggers.forEach(trigger => {
+      let triggers: Trigger[] = [];
+      this.Templates.forEach((template) => {
+        template.Triggers.forEach((trigger) => {
           if (!triggers.includes(trigger)){
             triggers.push(trigger);
           }
         });
       });
 
-      return triggers
+      return triggers;
     }
 
     getTriggerByID(TriggerID: string){
-      var trigger: Trigger | undefined = undefined
-      this.getAllTriggers().forEach(element => {
+      var trigger: Trigger | undefined = undefined;
+      this.getAllTriggers().forEach((element) => {
         if (element.ID === TriggerID){
-          trigger = element
+          trigger = element;
         }
       });
 
-      return trigger
+      return trigger;
     }
 
     getTriggerMappingForTrigger(TriggerID: string): TriggerAssignment | undefined{
       var tm: TriggerAssignment | undefined = undefined;
       this.TriggerMappings.forEach((element) => {
-        if (element.TriggerID == TriggerID){
+        if (element.TriggerID === TriggerID){
           tm = element;
         }
       });
 
-      return tm
+      return tm;
     }
 
     //This function returns the amount of problematic triggers for an agent
     problematicTriggers(agent: Agent): number{
-      let triggerProblematic = 0
-      this.getAllTriggers().forEach(element => {
-        let tm = this.getTriggerMappingForTrigger(element.ID)
+      let triggerProblematic = 0;
+      this.getAllTriggers().forEach((element) => {
+        let tm = this.getTriggerMappingForTrigger(element.ID);
         if (typeof tm !== undefined){
           if (tm?.Problematic){
-            triggerProblematic++
+            triggerProblematic++;
           }
         }
       });
 
-      return triggerProblematic
+      return triggerProblematic;
     }
 
     //This function returns the amount of ok triggers for an agent
     unproblematicTriggers(agent: Agent): number{
       let triggerOK = 0
-      this.getAllTriggers().forEach(element => {
+      this.getAllTriggers().forEach((element) => {
         let tm = this.getTriggerMappingForTrigger(element.ID)
         if (typeof tm !== undefined){
           if (!tm?.Problematic){
-            triggerOK++
+            triggerOK++;
           }
         }
       });
 
-      return triggerOK
+      return triggerOK;
     }
 }

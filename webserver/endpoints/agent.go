@@ -13,6 +13,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+//GetAgents returns all agents from the database
 func GetAgents(w http.ResponseWriter, r *http.Request) {
 	agents, err := dbtemplate.GetAgents(db.Client())
 	if err != nil {
@@ -23,6 +24,7 @@ func GetAgents(w http.ResponseWriter, r *http.Request) {
 	httpResponse.SuccessWithPayload(w, "OK", agents)
 }
 
+//AddTemplateToAgent adds the one or more templates to the specified agent
 func AddTemplateToAgent(w http.ResponseWriter, r *http.Request) {
 	agentIDRAW := strings.Split(r.URL.Path, "/")[4]
 	agentID, err := primitive.ObjectIDFromHex(agentIDRAW)

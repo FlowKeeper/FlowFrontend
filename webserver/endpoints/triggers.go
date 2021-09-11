@@ -14,7 +14,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-//Create trigger creates a new trigger and persists it in the database
+//CreateTrigger creates a new trigger and persists it in the database
 func CreateTrigger(w http.ResponseWriter, r *http.Request) {
 	if httphelper.HasEmptyBody(w, r) {
 		return

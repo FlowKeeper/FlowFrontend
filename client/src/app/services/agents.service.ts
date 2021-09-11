@@ -20,13 +20,13 @@ export class AgentsService {
     return this.http.get<StandartResponse>("/api/v1/agent").pipe(
       catchError((err, caught) => {
         if (err instanceof HttpErrorResponse){
-          this.alerts.DisplayGenericError(err.message)
+          this.alerts.displayGenericError(err.message);
         }else{
-          this.alerts.DisplayGenericError("Unknown error");
+          this.alerts.displayGenericError("Unknown error");
         }
 
         return throwError(err)
       })
-    )
+    );
   }
 }
