@@ -9,6 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+//CreateTrigger creates a trigger from the specified variables and returns the ID of the newly created document
 func CreateTrigger(Name, Description string, Severity models.TriggerSeverity, Expression string) (primitive.ObjectID, error) {
 	trigger := models.Trigger{
 		Name:        Name,

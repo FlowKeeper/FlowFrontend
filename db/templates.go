@@ -10,6 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+//CreateTemplate creates a template from the specified variables and returns the ID of the newly created document
 func CreateTemplate(Name, Description string, Items []primitive.ObjectID, Triggers []primitive.ObjectID) (primitive.ObjectID, error) {
 	template := models.Template{
 		Name:        Name,
@@ -36,6 +37,7 @@ func CreateTemplate(Name, Description string, Items []primitive.ObjectID, Trigge
 	return result.InsertedID.(primitive.ObjectID), nil
 }
 
+//AddItemsToTemplate adds the specified items to the specified template
 func AddItemsToTemplate(TemplateID primitive.ObjectID, Items []primitive.ObjectID) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
@@ -49,6 +51,7 @@ func AddItemsToTemplate(TemplateID primitive.ObjectID, Items []primitive.ObjectI
 	return result.Err()
 }
 
+//AddTriggersToTemplate adds the specified triggers to the specified template
 func AddTriggersToTemplate(TemplateID primitive.ObjectID, Triggers []primitive.ObjectID) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()

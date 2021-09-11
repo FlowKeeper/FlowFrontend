@@ -15,6 +15,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+//CreateItem creates a new item and perists it in the database
 func CreateItem(w http.ResponseWriter, r *http.Request) {
 	if httphelper.HasEmptyBody(w, r) {
 		return
@@ -59,15 +60,16 @@ func CreateItem(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//Check if an item with that name can be found in the db -> If so no error is returned by the function
-	//If an error is returned -> Check if it is the error we wanted
-	if _, err := dbtemplate.GetItemByName(db.Client(), request.Name); err == nil {
+	_, err := dbtemplate.GetItemByName(db.Client(), request.Name)
+	if err == nil {
 		httpResponse.UserError(w, 400, "A item with that name already exists")
 		return
-	} else {
-		if !errors.Is(err, mongo.ErrNoDocuments) {
-			httpResponse.InternalError(w, r, err)
-			return
-		}
+	}
+
+	//If an error is returned -> Check if it is the error we wanted
+	if !errors.Is(err, mongo.ErrNoDocuments) {
+		httpResponse.InternalError(w, r, err)
+		return
 	}
 
 	switch strings.ToLower(request.Type) {

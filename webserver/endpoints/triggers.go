@@ -14,6 +14,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+//Create trigger creates a new trigger and persists it in the database
 func CreateTrigger(w http.ResponseWriter, r *http.Request) {
 	if httphelper.HasEmptyBody(w, r) {
 		return
@@ -43,15 +44,16 @@ func CreateTrigger(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//Check if an trigger with that name can be found in the db -> If so no error is returned by the function
-	//If an error is returned -> Check if it is the error we wanted
-	if _, err := dbtemplate.GetTriggerByName(db.Client(), request.Name); err == nil {
+	_, err := dbtemplate.GetTriggerByName(db.Client(), request.Name)
+	if err == nil {
 		httpResponse.UserError(w, 400, "A trigger with that name already exists")
 		return
-	} else {
-		if !errors.Is(err, mongo.ErrNoDocuments) {
-			httpResponse.InternalError(w, r, err)
-			return
-		}
+	}
+
+	//If an error is returned -> Check if it is the error we wanted
+	if !errors.Is(err, mongo.ErrNoDocuments) {
+		httpResponse.InternalError(w, r, err)
+		return
 	}
 
 	switch strings.ToLower(request.Severity) {

@@ -23,23 +23,23 @@ export class Agent{
   }
 
   constructor(json: any){
-      this.ID = json.ID
-      this.Name = json.Name
-      this.AgentUUID = json.AgentUUID
-      this.Enabled = json.Enabled
-      this.LastSeen = json.LastSeen
-      this.OS = json.OS
-      this.Templates = json.Templates
-      this.TriggerMappings = json.TriggerMappings
-      this.Endpoint = json.Endpoint
+      this.ID = json.ID;
+      this.Name = json.Name;
+      this.AgentUUID = json.AgentUUID;
+      this.Enabled = json.Enabled;
+      this.LastSeen = json.LastSeen;
+      this.OS = json.OS;
+      this.Templates = json.Templates;
+      this.TriggerMappings = json.TriggerMappings;
+      this.Endpoint = json.Endpoint;
       this.Scraper = {
         Lock: json.Scraper.Lock,
         UUID: json.Scraper.UUID
-      }
+      };
 
       this.Templates.forEach((template,index) => {
         template.Triggers.forEach((trigger, triggerIndex) => {
-          this.Templates[index].Triggers[triggerIndex] = new Trigger(trigger)
+          this.Templates[index].Triggers[triggerIndex] = new Trigger(trigger);
         });
       });
     }
@@ -47,11 +47,11 @@ export class Agent{
 
 
     agentosToString(): string{
-      return AgentOS[this.OS]
+      return AgentOS[this.OS];
     }
 
     getAllItems(): Item[]{
-      let items: Item[] = []
+      let items: Item[] = [];
       this.Templates.forEach(template => {
         template.Items.forEach(item => {
           if (!items.includes(item)){
@@ -68,7 +68,7 @@ export class Agent{
       this.Templates.forEach(template => {
         template.Triggers.forEach(trigger => {
           if (!triggers.includes(trigger)){
-            triggers.push(trigger)
+            triggers.push(trigger);
           }
         });
       });
@@ -79,7 +79,7 @@ export class Agent{
     getTriggerByID(TriggerID: string){
       var trigger: Trigger | undefined = undefined
       this.getAllTriggers().forEach(element => {
-        if (element.ID == TriggerID){
+        if (element.ID === TriggerID){
           trigger = element
         }
       });
@@ -89,15 +89,12 @@ export class Agent{
 
     getTriggerMappingForTrigger(TriggerID: string): TriggerAssignment | undefined{
       var tm: TriggerAssignment | undefined = undefined;
-      this.TriggerMappings.forEach(element => {
+      this.TriggerMappings.forEach((element) => {
         if (element.TriggerID == TriggerID){
-          tm = element
+          tm = element;
         }
       });
 
-      if (tm === undefined){
-        console.log("Trigger assignments seem to be inconsistent. Didn't find assignment for trigger " + TriggerID)
-      }
       return tm
     }
 

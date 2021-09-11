@@ -26,7 +26,6 @@ export class AgentsComponent implements OnInit {
       });
 
       this.agents = newAgentArray
-      console.log("Got " + this.agents.length + " agent(s)")
     })
   }
 

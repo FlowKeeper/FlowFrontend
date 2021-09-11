@@ -9,6 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+//CreateItem creates an item with the specfied variables and returns the ID of the newly created document
 func CreateItem(Name, Description string, ReturnType models.ReturnType, Unit string, Interval int, Command string, OS models.AgentOS) (primitive.ObjectID, error) {
 	item := models.Item{
 		Name:        Name,

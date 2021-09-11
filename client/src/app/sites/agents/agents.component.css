@@ -1,17 +1,19 @@
-.agentTable{
+.agentTable {
     width: 100%;
 }
 
-.agentArea{
+.agentArea {
     margin: 10px;
 }
 
-.standartCell{
+.standartCell {
     margin-right: 10px;
 }
 
-.nobr { white-space: nowrap }
+.nobr {
+    white-space: nowrap
+}
 
-.clickabbleIcon{
+.clickabbleIcon {
     cursor: pointer;
 }

@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { AgentsService } from './services/agents.service';
+import { Component, OnInit } from "@angular/core";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { Observable } from "rxjs";
+import { map, shareReplay } from "rxjs/operators";
+import { AgentsService } from "./services/agents.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit{
 
@@ -19,11 +19,8 @@ export class AppComponent implements OnInit{
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private agentService: AgentsService) {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
-  async ngOnInit() {
-    let agents = await this.agentService.getAgents()
-
-  }
+  async ngOnInit() {}
 
 }

@@ -8,7 +8,7 @@ COPY . /src
 WORKDIR /src/client
 RUN npm install && npx ng build
 
-FROM alpine:latest
+FROM alpine:3
 RUN mkdir /app
 COPY --from=build-backend /src/server /app/server
 COPY --from=build-frontend /src/client/dist/client/ /app/assets

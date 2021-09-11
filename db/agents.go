@@ -9,6 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+//AddTemplatesToAgent adds the secified templates to the specified agent
 func AddTemplatesToAgent(AgentID primitive.ObjectID, Templates []primitive.ObjectID) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()

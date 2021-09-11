@@ -1,16 +1,16 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import Swal from 'sweetalert2';
-import { Agent, AgentOS } from '../models/agents.model';
-import { Item } from '../models/items.model';
-import { StandartResponse } from '../models/response.model';
-import { Trigger, TriggerAssignment } from '../models/triggers.model';
-import { AlertsService } from './alerts.service';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, throwError } from "rxjs";
+import { catchError, retry } from "rxjs/operators";
+import Swal from "sweetalert2";
+import { Agent, AgentOS } from "../models/agents.model";
+import { Item } from "../models/items.model";
+import { StandartResponse } from "../models/response.model";
+import { Trigger, TriggerAssignment } from "../models/triggers.model";
+import { AlertsService } from "./alerts.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AgentsService {
 
@@ -22,7 +22,7 @@ export class AgentsService {
         if (err instanceof HttpErrorResponse){
           this.alerts.DisplayGenericError(err.message)
         }else{
-          this.alerts.DisplayGenericError("Unknown error")
+          this.alerts.DisplayGenericError("Unknown error");
         }
 
         return throwError(err)

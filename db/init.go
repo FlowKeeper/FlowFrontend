@@ -16,6 +16,7 @@ var dbclient *mongo.Database
 
 const loggingArea = "DB"
 
+//Connect established a connection to the mongodb server and initialized the client used by most db functions
 func Connect() error {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
@@ -38,6 +39,7 @@ func Connect() error {
 	return nil
 }
 
+//Client returns the current mongodb client with a preselected database
 func Client() *mongo.Database {
 	return dbclient
 }

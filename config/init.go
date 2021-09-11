@@ -11,20 +11,19 @@ import (
 	"gitlab.cloud.spuda.net/Wieneo/golangutils/v2/stringHelper"
 )
 
-type SampleConfig struct {
+const linuxConfigPath = "/etc/flowfrontend/config.json"
+const windowsConfigPath = `C:\flowfrontend\config.json`
+
+var configPath = ""
+
+//Config stores the current configuration of the agent
+var Config struct {
 	Debug         bool
 	ListenAddress string
 	ListenPort    int
 	MongoDB       string
 	Redis         string
 }
-
-const linuxConfigPath = "/etc/flowfrontend/config.json"
-const windowsConfigPath = `C:\flowfrontend\config.json`
-
-var configPath = ""
-
-var Config SampleConfig
 
 const loggingArea = "CONFIG"
 

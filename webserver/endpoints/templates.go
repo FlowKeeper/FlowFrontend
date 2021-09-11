@@ -13,6 +13,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+//GetTemplates returns all templates to the client
 func GetTemplates(w http.ResponseWriter, r *http.Request) {
 	templates, err := dbtemplate.GetAllTemplates(db.Client())
 	if err != nil {
@@ -23,6 +24,7 @@ func GetTemplates(w http.ResponseWriter, r *http.Request) {
 	httpResponse.SuccessWithPayload(w, "OK", templates)
 }
 
+//CreateTemplate creates a new template and persists it in the database
 func CreateTemplate(w http.ResponseWriter, r *http.Request) {
 	if httphelper.HasEmptyBody(w, r) {
 		return
@@ -100,6 +102,7 @@ func CreateTemplate(w http.ResponseWriter, r *http.Request) {
 	httpResponse.SuccessWithPayload(w, "Created", templates[0])
 }
 
+//AddItemToTemplate adds one or multiple items to the specified template
 func AddItemToTemplate(w http.ResponseWriter, r *http.Request) {
 	templateIDRAW := strings.Split(r.URL.Path, "/")[4]
 	templateID, err := primitive.ObjectIDFromHex(templateIDRAW)
@@ -180,15 +183,7 @@ func AddItemToTemplate(w http.ResponseWriter, r *http.Request) {
 	httpResponse.SuccessWithPayload(w, "Added", templates[0])
 }
 
-func sliceContainsObjectID(Slice []primitive.ObjectID, ID primitive.ObjectID) bool {
-	for _, k := range Slice {
-		if k == ID {
-			return true
-		}
-	}
-	return false
-}
-
+//AddTriggerToTemplate adds one or multiple triggers to the specified template
 func AddTriggerToTemplate(w http.ResponseWriter, r *http.Request) {
 	templateIDRAW := strings.Split(r.URL.Path, "/")[4]
 	templateID, err := primitive.ObjectIDFromHex(templateIDRAW)
@@ -267,4 +262,13 @@ func AddTriggerToTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	httpResponse.SuccessWithPayload(w, "Added", templates[0])
+}
+
+func sliceContainsObjectID(Slice []primitive.ObjectID, ID primitive.ObjectID) bool {
+	for _, k := range Slice {
+		if k == ID {
+			return true
+		}
+	}
+	return false
 }
