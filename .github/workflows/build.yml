@@ -23,8 +23,16 @@ jobs:
       with:
         go-version: 1.17
 
-    - name: Test
+    - name: Test Backend
       run: go test -v ./...
+
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16
+
+    - name: Test Frontend
+      run: npx ng test --watch=false --browsers=ChromeHeadlessCustom
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
