@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/FlowKeeper/FlowFrontend/v2/config"
+	"github.com/FlowKeeper/FlowFrontend/v2/webserver/endpoints"
 	"github.com/gorilla/mux"
 	"gitlab.cloud.spuda.net/Wieneo/golangutils/v2/logger"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/config"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/webserver/endpoints"
 )
 
 const loggingArea = "WEB"

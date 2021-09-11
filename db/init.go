@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
+	"github.com/FlowKeeper/FlowFrontend/v2/config"
 	"gitlab.cloud.spuda.net/Wieneo/golangutils/v2/logger"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/config"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"

@@ -1,9 +1,9 @@
 package redis
 
 import (
+	"github.com/FlowKeeper/FlowFrontend/v2/config"
 	"github.com/go-redis/redis"
 	"gitlab.cloud.spuda.net/Wieneo/golangutils/v2/logger"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/config"
 )
 
 var connection *redis.Client

@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/FlowKeeper/FlowFrontend/v2/db"
+	"github.com/FlowKeeper/FlowUtils/v2/dbtemplate"
+	"github.com/FlowKeeper/FlowUtils/v2/models"
 	httphelper "gitlab.cloud.spuda.net/Wieneo/golangutils/v2/httpHelper"
 	"gitlab.cloud.spuda.net/Wieneo/golangutils/v2/httpResponse"
 	"gitlab.cloud.spuda.net/Wieneo/golangutils/v2/stringHelper"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/db"
-	"gitlab.cloud.spuda.net/flowkeeper/flowutils/v2/dbtemplate"
-	"gitlab.cloud.spuda.net/flowkeeper/flowutils/v2/models"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 

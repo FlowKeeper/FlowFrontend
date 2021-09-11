@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
+	"github.com/FlowKeeper/FlowFrontend/v2/config"
+	"github.com/FlowKeeper/FlowFrontend/v2/db"
+	"github.com/FlowKeeper/FlowFrontend/v2/redis"
+	"github.com/FlowKeeper/FlowFrontend/v2/webserver"
+	"github.com/FlowKeeper/FlowUtils/v2/flowutils"
 	"gitlab.cloud.spuda.net/Wieneo/golangutils/v2/logger"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/config"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/db"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/redis"
-	"gitlab.cloud.spuda.net/flowkeeper/flowfrontend/v2/webserver"
-	"gitlab.cloud.spuda.net/flowkeeper/flowutils/v2/flowutils"
 )
 
 func main() {
