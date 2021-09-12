@@ -101,3 +101,57 @@ func AddTemplateToAgent(w http.ResponseWriter, r *http.Request) {
 
 	httpResponse.SuccessWithPayload(w, "Added", agent)
 }
+
+func PatchAgent(w http.ResponseWriter, r *http.Request) {
+	agentIDRAW := strings.Split(r.URL.Path, "/")[4]
+	agentID, err := primitive.ObjectIDFromHex(agentIDRAW)
+	if err != nil {
+		httpResponse.UserError(w, 400, "Specified agent id was invalid")
+		return
+	}
+
+	if httphelper.HasEmptyBody(w, r) {
+		return
+	}
+
+	_, err = dbtemplate.GetAgent(db.Client(), agentID)
+	if err != nil {
+		if errors.Is(err, mongo.ErrNoDocuments) {
+			httpResponse.UserError(w, 404, "Specified agent wasn't found")
+			return
+		}
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	var request struct {
+		Name        string  `bson:"name,omitempty"`
+		Description *string `bson:"description,omitempty"` //Pointers are used to determine if the field got specified at all or is just an empty string / boolean
+		Endpoint    string  `bson:"endpoint,omitempty"`
+		Enabled     *bool   `bson:"enabled,omitempty"`
+	}
+
+	if httphelper.CastBodyToStruct(w, r, &request) != nil {
+		return
+	}
+
+	if err := db.PatchAgent(agentID, request); err != nil {
+		//Mongo driver doesn't seem to have the error we want mapped to any variable
+		if strings.Contains(err.Error(), `'$set' is empty.`) {
+			httpResponse.UserError(w, 400, "PATCH request must at least update one property")
+			return
+		}
+
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	//Return current agent struct to client
+	agent, err := dbtemplate.GetAgent(db.Client(), agentID)
+	if err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	httpResponse.SuccessWithPayload(w, "Patched", agent)
+}

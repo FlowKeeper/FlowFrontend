@@ -130,29 +130,4 @@ export class Agent{
       return triggerOK;
     }
 
-    compare(agent: Agent): { [key: string]: any }{
-      let changedMap: { [key: string]: any } = {};
-
-      if (this.Name !== agent.Name){
-        changedMap["name"] = agent.Name;
-      }
-
-      if (this.Description !== agent.Description){
-        changedMap["description"] = agent.Description;
-      }
-
-      if (this.Enabled !== agent.Enabled){
-        changedMap["enabled"] = agent.Enabled;
-      }
-
-      if (this.Templates !== agent.Templates){
-        changedMap["templates"] = agent.Templates;
-      }
-
-      if (this.Endpoint !== agent.Endpoint){
-        changedMap["endpoint"] = agent.Endpoint;
-      }
-
-      return changedMap;
-    }
 }

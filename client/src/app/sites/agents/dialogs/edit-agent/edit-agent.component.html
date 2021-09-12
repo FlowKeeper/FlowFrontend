@@ -1,11 +1,21 @@
 <h1 mat-dialog-title>Edit Agent {{agent.Name}}</h1>
-<div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="agent.Name">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onAbortClick()">Abort</button>
-  <button mat-button [mat-dialog-close]="agent" cdkFocusInitial>Ok</button>
-</div>
+<ng-container [formGroup]="this.formGroup">
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput required formControlName="agentName">
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="agentDescription">
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Endpoint</mat-label>
+      <input matInput required formControlName="agentEndpoint">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onAbortClick()">Abort</button>
+    <button mat-button (click)="onOKClick()" [mat-dialog-close]="this.changedMap" cdkFocusInitial>Ok</button>
+  </div>
+</ng-container>

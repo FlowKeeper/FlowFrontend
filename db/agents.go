@@ -22,3 +22,15 @@ func AddTemplatesToAgent(AgentID primitive.ObjectID, Templates []primitive.Objec
 
 	return result.Err()
 }
+
+func PatchAgent(AgentID primitive.ObjectID, Update interface{}) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	_, err := dbclient.Collection("agents").UpdateOne(ctx, bson.M{"_id": AgentID}, bson.M{"$set": Update})
+	if err != nil {
+		logger.Error(loggingArea, "Couldn't update agent:", err)
+	}
+
+	return err
+}

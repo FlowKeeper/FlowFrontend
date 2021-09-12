@@ -1,4 +1,11 @@
 export interface StandartResponse{
-    Status: string;
+    Status: StandartResponseType;
     Payload: any;
+}
+export enum StandartResponseType {
+    OK = "OK",
+    Patched = "Patched",
+    Added = "Added",
+    Error = "Error",
+    InternalError = "Internal Error"
 }

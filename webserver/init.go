@@ -20,17 +20,18 @@ func Init() {
 	router := mux.NewRouter()
 	router.Use(loggingMiddleware)
 
-	router.HandleFunc("/api/v1/agent", endpoints.GetAgents).Methods("GET")
-	router.HandleFunc("/api/v1/agent/{[0-9][a-z]{*}}/templates", endpoints.AddTemplateToAgent).Methods("PUT")
+	router.HandleFunc("/api/v1/agents", endpoints.GetAgents).Methods("GET")
+	router.HandleFunc("/api/v1/agents/{[0-9][a-z]{*}}/templates", endpoints.AddTemplateToAgent).Methods("PATCH")
+	router.HandleFunc("/api/v1/agents/{[0-9][a-z]{*}}", endpoints.PatchAgent).Methods("PATCH")
 
-	router.HandleFunc("/api/v1/template", endpoints.GetTemplates).Methods("GET")
-	router.HandleFunc("/api/v1/template", endpoints.CreateTemplate).Methods("POST")
-	router.HandleFunc("/api/v1/template/{[0-9][a-z]{*}}/items", endpoints.AddItemToTemplate).Methods("PUT")
-	router.HandleFunc("/api/v1/template/{[0-9][a-z]{*}}/triggers", endpoints.AddTriggerToTemplate).Methods("PUT")
+	router.HandleFunc("/api/v1/templates", endpoints.GetTemplates).Methods("GET")
+	router.HandleFunc("/api/v1/templates", endpoints.CreateTemplate).Methods("POST")
+	router.HandleFunc("/api/v1/templates/{[0-9][a-z]{*}}/items", endpoints.AddItemToTemplate).Methods("PUT")
+	router.HandleFunc("/api/v1/templates/{[0-9][a-z]{*}}/triggers", endpoints.AddTriggerToTemplate).Methods("PUT")
 
-	router.HandleFunc("/api/v1/item", endpoints.CreateItem).Methods("POST")
+	router.HandleFunc("/api/v1/items", endpoints.CreateItem).Methods("POST")
 
-	router.HandleFunc("/api/v1/trigger", endpoints.CreateTrigger).Methods("POST")
+	router.HandleFunc("/api/v1/triggers", endpoints.CreateTrigger).Methods("POST")
 
 	srv := &http.Server{
 		Handler:      router,

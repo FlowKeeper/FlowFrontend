@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Agent } from "src/app/models/agents.model";
-import { StandartResponse } from "src/app/models/response.model";
+import { StandartResponse, StandartResponseType } from "src/app/models/response.model";
 import { AgentsService } from "src/app/services/agents.service";
 import { EditAgentComponent } from "./dialogs/edit-agent/edit-agent.component";
 
@@ -40,10 +40,24 @@ export class AgentsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (typeof result !== undefined){
-        let recievedAgent = result as Agent
+      if (result !== undefined){
+        //Send changed map to backend
+        this.agentService.patchAgent(agent, result).subscribe((data: StandartResponse) => {
+          if (data.Status == StandartResponseType.Patched){
+            //Create new agent array and override the old one
+            //This is needed in order to trigger a redraw of the table
+            let newAgentArray: Agent[] = [];
 
-        agent.compare(recievedAgent)
+            this.agents.forEach((element, index) => {
+              if (element.ID == agent.ID){
+                element = new Agent(data.Payload)
+              }
+              newAgentArray.push(element)
+            });
+
+            this.agents = newAgentArray;
+          }
+        });
       }
     });
   }
