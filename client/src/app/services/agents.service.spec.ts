@@ -1,5 +1,6 @@
 import { HttpClientModule } from "@angular/common/http";
 import { TestBed } from "@angular/core/testing";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 import { AgentsService } from "./agents.service";
 
@@ -9,7 +10,14 @@ describe("AgentsService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports:[
-        HttpClientModule
+        HttpClientModule,
+        MatSnackBarModule
+      ],
+      providers:[
+        {
+          provide: MatSnackBarModule,
+          useValue: {}
+        },
       ]
     });
     service = TestBed.inject(AgentsService);

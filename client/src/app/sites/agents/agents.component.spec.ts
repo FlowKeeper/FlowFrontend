@@ -6,6 +6,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AgentsComponent } from "./agents.component";
 
@@ -23,7 +24,14 @@ describe("AgentsComponent", () => {
         MatTableModule,
         MatIconModule,
         MatListModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSnackBarModule
+      ],
+      providers: [
+        {
+          provide: MatSnackBarModule,
+          useValue: {}
+        }
       ]
     })
     .compileComponents();

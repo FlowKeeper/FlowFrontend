@@ -3,6 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { Agent } from "src/app/models/agents.model";
 import { StandartResponse, StandartResponseType } from "src/app/models/response.model";
 import { AgentsService } from "src/app/services/agents.service";
+import { AlertsService } from "src/app/services/alerts.service";
 import { EditAgentComponent } from "./dialogs/edit-agent/edit-agent.component";
 
 @Component({
@@ -12,10 +13,10 @@ import { EditAgentComponent } from "./dialogs/edit-agent/edit-agent.component";
 })
 export class AgentsComponent implements OnInit {
 
-  constructor(public agentService: AgentsService, public dialog: MatDialog) { }
+  constructor(public agentService: AgentsService, private alertService: AlertsService, public dialog: MatDialog) { }
 
   agents: Agent[] = []
-  agentsDisplayColumns: string[] = ["agent.name", "agent.description", "agent.endpoint", "agent.os", "agent.items", "agent.triggers", "actions"];
+  agentsDisplayColumns: string[] = ["agent.enabled", "agent.name", "agent.description", "agent.endpoint", "agent.os", "agent.items", "agent.triggers", "actions"];
 
   ngOnInit(): void {
     this.agentService.getAgents().subscribe((data: StandartResponse) => {
@@ -56,6 +57,8 @@ export class AgentsComponent implements OnInit {
             });
 
             this.agents = newAgentArray;
+
+            this.alertService.popInSuccessNotification("Agent successfully updated!");
           }
         });
       }
