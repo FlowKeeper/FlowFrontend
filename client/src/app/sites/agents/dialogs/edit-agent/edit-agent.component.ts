@@ -19,7 +19,8 @@ export class EditAgentComponent implements OnInit {
       this.formGroup = formBuilder.group({
         "agentName": [agent.Name, [Validators.required]],
         "agentDescription": [agent.Description],
-        "agentEndpoint": [agent.Endpoint, [Validators.required, this.verifyHostname()]]
+        "agentEndpoint": [agent.Endpoint, [Validators.required, this.verifyHostname()]],
+        "agentEnabled": [agent.Enabled]
       });
   }
 
@@ -54,8 +55,8 @@ export class EditAgentComponent implements OnInit {
       this.changedMap["description"] = this.formGroup.value.agentDescription;
     }
 
-    if (this.agent.Enabled !== false){
-      this.changedMap["enabled"] = true;
+    if (this.agent.Enabled !== this.formGroup.value.agentEnabled){
+      this.changedMap["enabled"] = this.formGroup.value.agentEnabled;
     }
 
     /*
