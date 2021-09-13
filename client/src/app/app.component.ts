@@ -1,26 +1,25 @@
-import { Component, OnInit } from "@angular/core";
-import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { Observable } from "rxjs";
-import { map, shareReplay } from "rxjs/operators";
-import { AgentsService } from "./services/agents.service";
+import { Component, OnInit } from "@angular/core"
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout"
+import { Observable } from "rxjs"
+import { map, shareReplay } from "rxjs/operators"
+import { AgentsService } from "./services/agents.service"
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
+    title = "FlowKeeper"
 
-  title = "FlowKeeper"
+    isHandset$: Observable<boolean> = this.breakpointObserver
+        .observe(Breakpoints.Handset)
+        .pipe(
+            map((result) => result.matches),
+            shareReplay()
+        )
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+    constructor(private breakpointObserver: BreakpointObserver) {}
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
-
-  async ngOnInit() {}
-
+    async ngOnInit() {}
 }

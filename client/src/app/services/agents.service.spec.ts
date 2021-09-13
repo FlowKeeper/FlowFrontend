@@ -1,29 +1,26 @@
-import { HttpClientModule } from "@angular/common/http";
-import { TestBed } from "@angular/core/testing";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { HttpClientModule } from "@angular/common/http"
+import { TestBed } from "@angular/core/testing"
+import { MatSnackBarModule } from "@angular/material/snack-bar"
 
-import { AgentsService } from "./agents.service";
+import { AgentsService } from "./agents.service"
 
 describe("AgentsService", () => {
-  let service: AgentsService;
+    let service: AgentsService
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports:[
-        HttpClientModule,
-        MatSnackBarModule
-      ],
-      providers:[
-        {
-          provide: MatSnackBarModule,
-          useValue: {}
-        },
-      ]
-    });
-    service = TestBed.inject(AgentsService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [HttpClientModule, MatSnackBarModule],
+            providers: [
+                {
+                    provide: MatSnackBarModule,
+                    useValue: {},
+                },
+            ],
+        })
+        service = TestBed.inject(AgentsService)
+    })
 
-  it("should be created", () => {
-    expect(service).toBeTruthy();
-  });
-});
+    it("should be created", () => {
+        expect(service).toBeTruthy()
+    })
+})
