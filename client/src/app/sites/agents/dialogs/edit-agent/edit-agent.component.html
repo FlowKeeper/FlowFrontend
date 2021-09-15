@@ -17,6 +17,6 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onAbortClick()">Abort</button>
-    <button mat-button (click)="onOKClick()" [mat-dialog-close]="this.changedMap" cdkFocusInitial>Ok</button>
+    <button mat-button (click)="onOKClick()" [mat-dialog-close]="this.changedMap" [disabled]="this.formGroup.invalid" cdkFocusInitial>OK</button>
   </div>
 </ng-container>

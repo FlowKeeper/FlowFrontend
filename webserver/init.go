@@ -23,6 +23,7 @@ func Init() {
 	router.HandleFunc("/api/v1/agents", endpoints.GetAgents).Methods("GET")
 	router.HandleFunc("/api/v1/agents/{[0-9][a-z]{*}}/templates", endpoints.AddTemplateToAgent).Methods("PATCH")
 	router.HandleFunc("/api/v1/agents/{[0-9][a-z]{*}}", endpoints.PatchAgent).Methods("PATCH")
+	router.HandleFunc("/api/v1/agents/{[0-9][a-z]{*}}", endpoints.DeleteAgent).Methods("DELETE")
 
 	router.HandleFunc("/api/v1/templates", endpoints.GetTemplates).Methods("GET")
 	router.HandleFunc("/api/v1/templates", endpoints.CreateTemplate).Methods("POST")

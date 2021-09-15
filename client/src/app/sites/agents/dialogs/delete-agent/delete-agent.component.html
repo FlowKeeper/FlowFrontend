@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Delete Agent {{agent.Name}}</h1>
+<p>Do you really want to delete agent "<code>{{agent.Name}}</code>"?</p>
+<div mat-dialog-actions>
+    <button mat-button (click)="onAbortClick()" cdkFocusInitial>Abort</button>
+    <button mat-button (click)="onOKClick()" [mat-dialog-close]="true">OK</button>
+</div>

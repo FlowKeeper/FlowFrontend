@@ -155,3 +155,35 @@ func PatchAgent(w http.ResponseWriter, r *http.Request) {
 
 	httpResponse.SuccessWithPayload(w, "Patched", agent)
 }
+
+func DeleteAgent(w http.ResponseWriter, r *http.Request) {
+	agentIDRAW := strings.Split(r.URL.Path, "/")[4]
+	agentID, err := primitive.ObjectIDFromHex(agentIDRAW)
+	if err != nil {
+		httpResponse.UserError(w, 400, "Specified agent id was invalid")
+		return
+	}
+
+	agent, err := dbtemplate.GetAgent(db.Client(), agentID)
+	if err != nil {
+		if errors.Is(err, mongo.ErrNoDocuments) {
+			httpResponse.UserError(w, 404, "Specified agent wasn't found")
+			return
+		}
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	update := struct {
+		Deleted bool
+	}{
+		Deleted: true,
+	}
+
+	if err := db.PatchAgent(agent.ID, update); err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	httpResponse.Success(w, "Deleted", "Deleted agent "+agent.ID.Hex())
+}

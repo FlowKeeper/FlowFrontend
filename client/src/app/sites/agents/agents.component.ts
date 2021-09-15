@@ -7,6 +7,7 @@ import {
 } from "src/app/models/response.model"
 import { AgentsService } from "src/app/services/agents.service"
 import { AlertsService } from "src/app/services/alerts.service"
+import { DeleteAgentComponent } from "./dialogs/delete-agent/delete-agent.component"
 import { EditAgentComponent } from "./dialogs/edit-agent/edit-agent.component"
 
 @Component({
@@ -57,6 +58,13 @@ export class AgentsComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((result) => {
             if (result !== undefined) {
+                //Check if result set is empty
+                if (Object.keys(result).length === 0) {
+                    this.alertService.popInSuccessNotification(
+                        "No changes were made."
+                    )
+                    return
+                }
                 //Send changed map to backend
                 this.agentService
                     .patchAgent(agent, result)
@@ -80,6 +88,40 @@ export class AgentsComponent implements OnInit {
                             )
                         }
                     })
+            }
+        })
+    }
+
+    openDeleteDialog(agent: Agent) {
+        const dialogRef = this.dialog.open(DeleteAgentComponent, {
+            width: "500px",
+            data: agent,
+        })
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result !== undefined) {
+                result = result as boolean
+                if (result === true) {
+                    this.agentService
+                        .deleteAgent(agent)
+                        .subscribe((data: StandartResponse) => {
+                            if (data.Status == StandartResponseType.Deleted) {
+                                let newAgentArray: Agent[] = []
+
+                                this.agents.forEach((element, index) => {
+                                    if (element.ID != agent.ID) {
+                                        newAgentArray.push(element)
+                                    }
+                                })
+
+                                this.agents = newAgentArray
+
+                                this.alertService.popInSuccessNotification(
+                                    "Agent was marked for deletion!"
+                                )
+                            }
+                        })
+                }
             }
         })
     }

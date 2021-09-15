@@ -8,4 +8,5 @@ export enum StandartResponseType {
     Added = "Added",
     Error = "Error",
     InternalError = "Internal Error",
+    Deleted = "Deleted",
 }

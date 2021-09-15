@@ -44,4 +44,20 @@ export class AgentsService {
                 })
             )
     }
+
+    deleteAgent(Agent: Agent) {
+        return this.http
+            .delete<StandartResponse>(`/api/v1/agents/${Agent.ID}`)
+            .pipe(
+                catchError((err, caught) => {
+                    if (err instanceof HttpErrorResponse) {
+                        this.alerts.displayGenericError(err.message)
+                    } else {
+                        this.alerts.displayGenericError("Unknown error")
+                    }
+
+                    return throwError(err)
+                })
+            )
+    }
 }

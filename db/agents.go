@@ -23,6 +23,7 @@ func AddTemplatesToAgent(AgentID primitive.ObjectID, Templates []primitive.Objec
 	return result.Err()
 }
 
+//PatchAgent updates the fields specified in the update interface to the specified value
 func PatchAgent(AgentID primitive.ObjectID, Update interface{}) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
@@ -30,6 +31,19 @@ func PatchAgent(AgentID primitive.ObjectID, Update interface{}) error {
 	_, err := dbclient.Collection("agents").UpdateOne(ctx, bson.M{"_id": AgentID}, bson.M{"$set": Update})
 	if err != nil {
 		logger.Error(loggingArea, "Couldn't update agent:", err)
+	}
+
+	return err
+}
+
+//DeleteAgent removes an agent from the database
+func DeleteAgent(AgentID primitive.ObjectID) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	_, err := dbclient.Collection("agents").DeleteOne(ctx, bson.M{"_id": AgentID})
+	if err != nil {
+		logger.Error(loggingArea, "Couldn't delete agent:", err)
 	}
 
 	return err
