@@ -16,7 +16,7 @@
     <p><mat-checkbox formControlName="agentEnabled">Enable</mat-checkbox></p>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onAbortClick()">Abort</button>
-    <button mat-button (click)="onOKClick()" [mat-dialog-close]="this.changedMap" [disabled]="this.formGroup.invalid" cdkFocusInitial>OK</button>
+    <button mat-button (click)="onAbortClick()" cdkFocusInitial>Abort</button>
+    <button mat-button (click)="onOKClick()" [mat-dialog-close]="this.changedMap" [disabled]="this.formGroup.invalid">OK</button>
   </div>
 </ng-container>

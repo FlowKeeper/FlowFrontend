@@ -54,4 +54,9 @@
         <tr mat-header-row *matHeaderRowDef="agentsDisplayColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: agentsDisplayColumns;"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of agents"
+                 class="mat-elevation-z2">
+    </mat-paginator>
 </div>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, OnInit, ViewChild } from "@angular/core"
 import { MatDialog } from "@angular/material/dialog"
+import { MatPaginator } from "@angular/material/paginator"
+import { MatTableDataSource } from "@angular/material/table"
 import { Agent } from "src/app/models/agents.model"
 import {
     StandartResponse,
@@ -7,6 +9,7 @@ import {
 } from "src/app/models/response.model"
 import { AgentsService } from "src/app/services/agents.service"
 import { AlertsService } from "src/app/services/alerts.service"
+import { LoggerService } from "src/app/services/logger.service"
 import { DeleteAgentComponent } from "./dialogs/delete-agent/delete-agent.component"
 import { EditAgentComponent } from "./dialogs/edit-agent/edit-agent.component"
 
@@ -16,13 +19,7 @@ import { EditAgentComponent } from "./dialogs/edit-agent/edit-agent.component"
     styleUrls: ["./agents.component.css"],
 })
 export class AgentsComponent implements OnInit {
-    constructor(
-        public agentService: AgentsService,
-        private alertService: AlertsService,
-        public dialog: MatDialog
-    ) {}
-
-    agents: Agent[] = []
+    agents = new MatTableDataSource<Agent>()
     agentsDisplayColumns: string[] = [
         "agent.enabled",
         "agent.name",
@@ -34,6 +31,19 @@ export class AgentsComponent implements OnInit {
         "actions",
     ]
 
+    @ViewChild(MatPaginator) paginator!: MatPaginator
+
+    ngAfterViewInit() {
+        this.agents.paginator = this.paginator
+    }
+
+    constructor(
+        public agentService: AgentsService,
+        private alertService: AlertsService,
+        public dialog: MatDialog,
+        private logger: LoggerService
+    ) {}
+
     ngOnInit(): void {
         this.agentService.getAgents().subscribe((data: StandartResponse) => {
             let newAgentArray: Agent[] = []
@@ -43,7 +53,8 @@ export class AgentsComponent implements OnInit {
                 newAgentArray.push(new Agent(element))
             })
 
-            this.agents = newAgentArray
+            this.agents.data = newAgentArray
+            this.logger.info("Got " + this.agents.data.length + " agents")
         })
     }
 
@@ -74,14 +85,14 @@ export class AgentsComponent implements OnInit {
                             //This is needed in order to trigger a redraw of the table
                             let newAgentArray: Agent[] = []
 
-                            this.agents.forEach((element, index) => {
+                            this.agents.data.forEach((element, index) => {
                                 if (element.ID == agent.ID) {
                                     element = new Agent(data.Payload)
                                 }
                                 newAgentArray.push(element)
                             })
 
-                            this.agents = newAgentArray
+                            this.agents.data = newAgentArray
 
                             this.alertService.popInSuccessNotification(
                                 "Agent successfully updated!"
@@ -108,13 +119,13 @@ export class AgentsComponent implements OnInit {
                             if (data.Status == StandartResponseType.Deleted) {
                                 let newAgentArray: Agent[] = []
 
-                                this.agents.forEach((element, index) => {
+                                this.agents.data.forEach((element, index) => {
                                     if (element.ID != agent.ID) {
                                         newAgentArray.push(element)
                                     }
                                 })
 
-                                this.agents = newAgentArray
+                                this.agents.data = newAgentArray
 
                                 this.alertService.popInSuccessNotification(
                                     "Agent was marked for deletion!"

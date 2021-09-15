@@ -1,1 +1,41 @@
-<p>templates works!</p>
+<div class="templateArea">
+    <h2>Templates</h2>
+    <table mat-table [dataSource]="templates" class="mat-elevation-z8 templateTable">
+        <!-- Position Column -->
+        <ng-container matColumnDef="template.name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{element.Name}}</span> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="template.description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{element.Description}}</span> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="template.items">
+            <th mat-header-cell *matHeaderCellDef> Items </th>
+            <td mat-cell *matCellDef="let element" class="nobr"><span class="standartCell">{{element.Items.length}}</span> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="template.triggers">
+            <th mat-header-cell *matHeaderCellDef> Triggers </th>
+            <td mat-cell *matCellDef="let element" class="nobr"><span class="standartCell">{{element.Triggers.length}}</span> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element" class="nobr">
+                <mat-icon aria-hidden="false" aria-label="Edit Agent" class="clickabbleIcon" (click)="openTemplateEdit(element)" >edit</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Delete Agent" class="clickabbleIcon">delete</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="templateDisplayColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: templateDisplayColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons 
+                 aria-label="Select page of templates"
+                 class="mat-elevation-z2">
+    </mat-paginator>
+</div>

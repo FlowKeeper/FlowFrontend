@@ -25,8 +25,10 @@ import { MatFormFieldModule } from "@angular/material/form-field"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { MatInputModule } from "@angular/material/input"
 import { MatCheckboxModule } from "@angular/material/checkbox"
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { DeleteAgentComponent } from './sites/agents/dialogs/delete-agent/delete-agent.component'
+import { MatSnackBarModule } from "@angular/material/snack-bar"
+import { DeleteAgentComponent } from "./sites/agents/dialogs/delete-agent/delete-agent.component"
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { EditTemplateComponent } from './sites/templates/edit-template/edit-template.component'
 
 @NgModule({
     declarations: [
@@ -36,6 +38,7 @@ import { DeleteAgentComponent } from './sites/agents/dialogs/delete-agent/delete
         TemplatesComponent,
         EditAgentComponent,
         DeleteAgentComponent,
+        EditTemplateComponent,
     ],
     imports: [
         HttpClientModule,
@@ -62,6 +65,7 @@ import { DeleteAgentComponent } from './sites/agents/dialogs/delete-agent/delete
         ReactiveFormsModule,
         MatCheckboxModule,
         MatSnackBarModule,
+        MatPaginatorModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -1,0 +1,26 @@
+import { HttpClient, HttpErrorResponse } from "@angular/common/http"
+import { Injectable } from "@angular/core"
+import { Observable, throwError } from "rxjs"
+import { catchError } from "rxjs/operators"
+import { StandartResponse } from "../models/response.model"
+import { AlertsService } from "./alerts.service"
+@Injectable({
+    providedIn: "root",
+})
+export class TemplatesService {
+    constructor(private http: HttpClient, private alerts: AlertsService) {}
+
+    getTemplates(): Observable<StandartResponse> {
+        return this.http.get<StandartResponse>("/api/v1/templates").pipe(
+            catchError((err, caught) => {
+                if (err instanceof HttpErrorResponse) {
+                    this.alerts.displayGenericError(err.message)
+                } else {
+                    this.alerts.displayGenericError("Unknown error")
+                }
+
+                return throwError(err)
+            })
+        )
+    }
+}
