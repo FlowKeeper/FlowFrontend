@@ -23,4 +23,20 @@ export class TemplatesService {
             })
         )
     }
+
+    getTemplateByID(TemplateID: string): Observable<StandartResponse> {
+        return this.http
+            .get<StandartResponse>("/api/v1/templates/" + TemplateID)
+            .pipe(
+                catchError((err, caught) => {
+                    if (err instanceof HttpErrorResponse) {
+                        this.alerts.displayGenericError(err.message)
+                    } else {
+                        this.alerts.displayGenericError("Unknown error")
+                    }
+
+                    return throwError(err)
+                })
+            )
+    }
 }

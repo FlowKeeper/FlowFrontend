@@ -24,6 +24,28 @@ func GetAgents(w http.ResponseWriter, r *http.Request) {
 	httpResponse.SuccessWithPayload(w, "OK", agents)
 }
 
+//GetAgent returns a single agent from the database
+func GetAgent(w http.ResponseWriter, r *http.Request) {
+	agentIDRAW := strings.Split(r.URL.Path, "/")[4]
+	agentID, err := primitive.ObjectIDFromHex(agentIDRAW)
+	if err != nil {
+		httpResponse.UserError(w, 400, "Specified agent id was invalid")
+		return
+	}
+
+	agent, err := dbtemplate.GetAgent(db.Client(), agentID)
+	if err != nil {
+		if errors.Is(err, mongo.ErrNoDocuments) {
+			httpResponse.UserError(w, 404, "Specified agent wasn't found")
+			return
+		}
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	httpResponse.SuccessWithPayload(w, "OK", agent)
+}
+
 //AddTemplateToAgent adds the one or more templates to the specified agent
 func AddTemplateToAgent(w http.ResponseWriter, r *http.Request) {
 	agentIDRAW := strings.Split(r.URL.Path, "/")[4]

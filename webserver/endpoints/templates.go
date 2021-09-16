@@ -24,6 +24,29 @@ func GetTemplates(w http.ResponseWriter, r *http.Request) {
 	httpResponse.SuccessWithPayload(w, "OK", templates)
 }
 
+//GetTemplate returns a single template from the database
+func GetTemplate(w http.ResponseWriter, r *http.Request) {
+	templateIDRAW := strings.Split(r.URL.Path, "/")[4]
+	templateID, err := primitive.ObjectIDFromHex(templateIDRAW)
+	if err != nil {
+		httpResponse.UserError(w, 400, "Specified template id was invalid")
+		return
+	}
+
+	templates, err := dbtemplate.GetTemplates(db.Client(), []primitive.ObjectID{templateID})
+	if err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	if len(templates) == 0 {
+		httpResponse.UserError(w, 404, "Specified template wasn't found")
+		return
+	}
+
+	httpResponse.SuccessWithPayload(w, "OK", templates[0])
+}
+
 //CreateTemplate creates a new template and persists it in the database
 func CreateTemplate(w http.ResponseWriter, r *http.Request) {
 	if httphelper.HasEmptyBody(w, r) {

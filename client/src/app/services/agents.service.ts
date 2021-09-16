@@ -15,6 +15,20 @@ import { AlertsService } from "./alerts.service"
 export class AgentsService {
     constructor(private http: HttpClient, private alerts: AlertsService) {}
 
+    getAgentByID(ID: string): Observable<StandartResponse> {
+        return this.http.get<StandartResponse>("/api/v1/agents/" + ID).pipe(
+            catchError((err, caught) => {
+                if (err instanceof HttpErrorResponse) {
+                    this.alerts.displayGenericError(err.message)
+                } else {
+                    this.alerts.displayGenericError("Unknown error")
+                }
+
+                return throwError(err)
+            })
+        )
+    }
+
     getAgents(): Observable<StandartResponse> {
         return this.http.get<StandartResponse>("/api/v1/agents").pipe(
             catchError((err, caught) => {

@@ -1,0 +1,23 @@
+.editTemplateArea{
+    width: 95%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.bigInput{
+    width: 100%;
+}
+
+.spaceRadioButtons{
+    margin-left: 10px;
+}
+
+.itemTable{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.mat-column-item-type {
+    width: 32px;
+    font-weight: bold;
+}
