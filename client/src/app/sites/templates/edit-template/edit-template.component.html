@@ -13,46 +13,10 @@
     <mat-divider></mat-divider>
     <div style="margin-top: 10px;">
         <mat-radio-group aria-label="OS">
-            <mat-radio-button value="2" checked (click)="filterByOS(2)">All</mat-radio-button>
-            <mat-radio-button value="1" class="spaceRadioButtons" (click)="filterByOS(1)">Linux</mat-radio-button>
-            <mat-radio-button value="0" class="spaceRadioButtons" (click)="filterByOS(0)">Windows</mat-radio-button>
+            <mat-radio-button value="2" checked (click)="this.linkedItemsTable.filterByOS(2)">All</mat-radio-button>
+            <mat-radio-button value="1" class="spaceRadioButtons" (click)="this.linkedItemsTable.filterByOS(1)">Linux</mat-radio-button>
+            <mat-radio-button value="0" class="spaceRadioButtons" (click)="this.linkedItemsTable.filterByOS(0)">Windows</mat-radio-button>
         </mat-radio-group>
     </div>
-    <table mat-table [dataSource]="displayedItems" class="mat-elevation-z8 itemTable">
-        <!-- Position Column -->
-        <ng-container matColumnDef="item.type">
-            <th mat-header-cell *matHeaderCellDef title="OS Type"> T </th>
-            <td mat-cell *matCellDef="let element"> <span class="standartCell" [title]="this.agentosToString(element.CheckOn)">{{this.agentosToString(element.CheckOn).substring(0, 1)}}</span> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="item.name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{element.Name}}</span> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="item.description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{element.Description}}</span> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="item.command">
-            <th mat-header-cell *matHeaderCellDef> Command </th>
-            <td mat-cell *matCellDef="let element"> <span class="standartCell"><code>{{element.Command}}</code></span> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let element" class="nobr">
-                <mat-icon aria-hidden="false" aria-label="Unlink Item" class="clickabbleIcon" (click)="openUnlinkDialog(element)" >link_off</mat-icon>
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayItemColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayItemColumns;"></tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[5,10,20,50,100]"
-                 showFirstLastButtons
-                 aria-label="Select page of agents"
-                 class="mat-elevation-z2">
-    </mat-paginator>
+    <app-item-table></app-item-table>
 </div>

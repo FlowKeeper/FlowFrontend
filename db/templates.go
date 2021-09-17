@@ -64,3 +64,27 @@ func AddTriggersToTemplate(TemplateID primitive.ObjectID, Triggers []primitive.O
 
 	return result.Err()
 }
+
+func UnlinkItemFromTemplate(TemplateID primitive.ObjectID, ItemID primitive.ObjectID) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	result := dbclient.Collection("templates").FindOneAndUpdate(ctx, bson.M{"_id": TemplateID}, bson.M{"$pull": bson.M{"itemids": ItemID}})
+	if result.Err() != nil {
+		logger.Error(loggingArea, "Couldn't unlink item from template:", result.Err())
+	}
+
+	return result.Err()
+}
+
+func UnlinkTriggerFromTemplate(TemplateID primitive.ObjectID, TriggerID primitive.ObjectID) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	result := dbclient.Collection("templates").FindOneAndUpdate(ctx, bson.M{"_id": TemplateID}, bson.M{"$pull": bson.M{"triggerids": TriggerID}})
+	if result.Err() != nil {
+		logger.Error(loggingArea, "Couldn't unlink trigger from template:", result.Err())
+	}
+
+	return result.Err()
+}

@@ -1,6 +1,7 @@
 package endpoints
 
 import (
+	"errors"
 	"net/http"
 	"strings"
 
@@ -285,6 +286,133 @@ func AddTriggerToTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	httpResponse.SuccessWithPayload(w, "Added", templates[0])
+}
+
+//RemoveItemFromTemplate unlinks the specified item from the template
+func RemoveItemFromTemplate(w http.ResponseWriter, r *http.Request) {
+	templateIDRAW := strings.Split(r.URL.Path, "/")[4]
+	templateID, err := primitive.ObjectIDFromHex(templateIDRAW)
+	if err != nil {
+		httpResponse.UserError(w, 400, "Specified template id was invalid")
+		return
+	}
+
+	templates, err := dbtemplate.GetTemplates(db.Client(), []primitive.ObjectID{templateID})
+	if err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	if len(templates) == 0 {
+		httpResponse.UserError(w, 404, "Specified template wasn't found")
+		return
+	}
+
+	//We need a function for retrieving a single template
+	template := templates[0]
+
+	//Retrieve specified item
+	itemIDRAW := strings.Split(r.URL.Path, "/")[6]
+	itemID, err := primitive.ObjectIDFromHex(itemIDRAW)
+	if err != nil {
+		httpResponse.UserError(w, 400, "Specified item id was invalid")
+		return
+	}
+
+	resolvedItems, err := dbtemplate.GetItems(db.Client(), []primitive.ObjectID{itemID})
+	if err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	if len(resolvedItems) == 0 {
+		httpResponse.UserError(w, 404, "Specified item wasn't found")
+		return
+	}
+
+	if !sliceContainsObjectID(template.ItemIDs, itemID) {
+		httpResponse.UserError(w, 404, "Specified item isn't linked to the template")
+		return
+	}
+
+	if err := db.UnlinkItemFromTemplate(templateID, itemID); err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	//Return the newly updated template
+	templates, err = dbtemplate.GetTemplates(db.Client(), []primitive.ObjectID{templateID})
+	if err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	if len(templates) == 0 {
+		httpResponse.InternalError(w, r, errors.New("template vanished after unlinking item?"))
+		return
+	}
+	httpResponse.SuccessWithPayload(w, "Deleted", templates[0])
+}
+
+//RemoveTriggerFromTemplate unlinks the specified trigger from the template
+func RemoveTriggerFromTemplate(w http.ResponseWriter, r *http.Request) {
+	templateIDRAW := strings.Split(r.URL.Path, "/")[4]
+	templateID, err := primitive.ObjectIDFromHex(templateIDRAW)
+	if err != nil {
+		httpResponse.UserError(w, 400, "Specified template id was invalid")
+		return
+	}
+
+	templates, err := dbtemplate.GetTemplates(db.Client(), []primitive.ObjectID{templateID})
+	if err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	if len(templates) == 0 {
+		httpResponse.UserError(w, 404, "Specified template wasn't found")
+		return
+	}
+
+	//We need a function for retrieving a single template
+	template := templates[0]
+
+	//Retrieve specified trigger
+	triggerIDRAW := strings.Split(r.URL.Path, "/")[6]
+	triggerID, err := primitive.ObjectIDFromHex(triggerIDRAW)
+	if err != nil {
+		httpResponse.UserError(w, 400, "Specified trigger id was invalid")
+		return
+	}
+
+	_, err = dbtemplate.GetTrigger(db.Client(), triggerID)
+	if err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	if !sliceContainsObjectID(template.TriggerIDs, triggerID) {
+		httpResponse.UserError(w, 404, "Specified trigger isn't linked to the template")
+		return
+	}
+
+	if err := db.UnlinkTriggerFromTemplate(templateID, triggerID); err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	//Return the newly updated template
+	templates, err = dbtemplate.GetTemplates(db.Client(), []primitive.ObjectID{templateID})
+	if err != nil {
+		httpResponse.InternalError(w, r, err)
+		return
+	}
+
+	if len(templates) == 0 {
+		httpResponse.InternalError(w, r, errors.New("template vanished after unlinking trigger?"))
+		return
+	}
+	httpResponse.SuccessWithPayload(w, "Deleted", templates[0])
 }
 
 func sliceContainsObjectID(Slice []primitive.ObjectID, ID primitive.ObjectID) bool {

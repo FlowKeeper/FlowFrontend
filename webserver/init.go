@@ -31,6 +31,8 @@ func Init() {
 	router.HandleFunc("/api/v1/templates", endpoints.CreateTemplate).Methods("POST")
 	router.HandleFunc("/api/v1/templates/{[0-9][a-z]{*}}/items", endpoints.AddItemToTemplate).Methods("PUT")
 	router.HandleFunc("/api/v1/templates/{[0-9][a-z]{*}}/triggers", endpoints.AddTriggerToTemplate).Methods("PUT")
+	router.HandleFunc("/api/v1/templates/{[0-9][a-z]{*}}/items/{[0-9][a-z]{*}}", endpoints.RemoveItemFromTemplate).Methods("DELETE")
+	router.HandleFunc("/api/v1/templates/{[0-9][a-z]{*}}/triggers/{[0-9][a-z]{*}}", endpoints.RemoveItemFromTemplate).Methods("DELETE")
 
 	router.HandleFunc("/api/v1/items", endpoints.CreateItem).Methods("POST")
 

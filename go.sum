@@ -35,6 +35,8 @@ github.com/FlowKeeper/FlowUtils/v2 v2.0.0-20210915045553-378922d85d06 h1:tebmigU
 github.com/FlowKeeper/FlowUtils/v2 v2.0.0-20210915045553-378922d85d06/go.mod h1:JnqnfIlzQ0P5DEHlNbKoPar58eI5NnifsZEdBpmhB/w=
 github.com/FlowKeeper/FlowUtils/v2 v2.0.0-20210915134810-31d29f00a58c h1:r9zzhRAST1BLlPtQNSb3dv7wzt9HQC2jp+gB17Pvkjo=
 github.com/FlowKeeper/FlowUtils/v2 v2.0.0-20210915134810-31d29f00a58c/go.mod h1:JnqnfIlzQ0P5DEHlNbKoPar58eI5NnifsZEdBpmhB/w=
+github.com/FlowKeeper/FlowUtils/v2 v2.0.0-20210917042219-c89ff57a6b74 h1:0i+NLvWW62ZuOdaSeT+kbOAzDHxNYMJn0KYugkMmZl4=
+github.com/FlowKeeper/FlowUtils/v2 v2.0.0-20210917042219-c89ff57a6b74/go.mod h1:JnqnfIlzQ0P5DEHlNbKoPar58eI5NnifsZEdBpmhB/w=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-redis/redis v6.15.9+incompatible h1:K0pv1D7EQUjfyoMql+r/jZqCLizCGKFlFgcHWWmHQjg=

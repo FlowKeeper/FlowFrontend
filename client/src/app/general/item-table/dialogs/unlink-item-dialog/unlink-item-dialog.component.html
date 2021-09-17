@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Unlink Item {{item.Name}}</h1>
+<p>Do you really want to unlink item "<code>{{item.Name}}</code>"?</p>
+<div mat-dialog-actions>
+    <button mat-button (click)="onAbortClick()" cdkFocusInitial>Abort</button>
+    <button mat-button (click)="onOKClick()">OK</button>
+</div>

@@ -39,4 +39,45 @@ export class TemplatesService {
                 })
             )
     }
+
+    unlinkItemFromTemplate(
+        TemplateID: string,
+        ItemID: string
+    ): Observable<StandartResponse> {
+        return this.http
+            .delete<StandartResponse>(
+                "/api/v1/templates/" + TemplateID + "/items/" + ItemID
+            )
+            .pipe(
+                catchError((err, caught) => {
+                    if (err instanceof HttpErrorResponse) {
+                        this.alerts.displayGenericError(err.message)
+                    } else {
+                        this.alerts.displayGenericError("Unknown error")
+                    }
+
+                    return throwError(err)
+                })
+            )
+    }
+    unlinkTriggerFromTemplate(
+        TemplateID: string,
+        TriggerID: string
+    ): Observable<StandartResponse> {
+        return this.http
+            .delete<StandartResponse>(
+                "/api/v1/templates/" + TemplateID + "/triggers/" + TriggerID
+            )
+            .pipe(
+                catchError((err, caught) => {
+                    if (err instanceof HttpErrorResponse) {
+                        this.alerts.displayGenericError(err.message)
+                    } else {
+                        this.alerts.displayGenericError("Unknown error")
+                    }
+
+                    return throwError(err)
+                })
+            )
+    }
 }

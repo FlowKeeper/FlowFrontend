@@ -30,6 +30,8 @@ import { DeleteAgentComponent } from "./sites/agents/dialogs/delete-agent/delete
 import { MatPaginatorModule } from "@angular/material/paginator"
 import { EditTemplateComponent } from "./sites/templates/edit-template/edit-template.component"
 import { MatRadioModule } from "@angular/material/radio"
+import { ItemTableComponent } from "./general/item-table/item-table.component"
+import { UnlinkItemDialogComponent } from "./general/item-table/dialogs/unlink-item-dialog/unlink-item-dialog.component"
 
 @NgModule({
     declarations: [
@@ -40,6 +42,8 @@ import { MatRadioModule } from "@angular/material/radio"
         EditAgentComponent,
         DeleteAgentComponent,
         EditTemplateComponent,
+        ItemTableComponent,
+        UnlinkItemDialogComponent,
     ],
     imports: [
         HttpClientModule,
