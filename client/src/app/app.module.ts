@@ -31,7 +31,8 @@ import { MatPaginatorModule } from "@angular/material/paginator"
 import { EditTemplateComponent } from "./sites/templates/edit-template/edit-template.component"
 import { MatRadioModule } from "@angular/material/radio"
 import { ItemTableComponent } from "./general/item-table/item-table.component"
-import { UnlinkItemDialogComponent } from "./general/item-table/dialogs/unlink-item-dialog/unlink-item-dialog.component"
+import { UnlinkItemDialogComponent } from "./general/item-table/dialogs/unlink-item-dialog/unlink-item-dialog.component";
+import { LinkItemToTemplateComponent } from './sites/templates/dialogs/link-item-to-template/link-item-to-template.component'
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import { UnlinkItemDialogComponent } from "./general/item-table/dialogs/unlink-i
         EditTemplateComponent,
         ItemTableComponent,
         UnlinkItemDialogComponent,
+        LinkItemToTemplateComponent,
     ],
     imports: [
         HttpClientModule,

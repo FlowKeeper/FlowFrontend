@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Link Item</h1>
+<div mat-dialog-content>
+    <mat-form-field style="width: 100%;" appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Item Name">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <table mat-table [dataSource]="items" class="mat-elevation-z8 itemLinkTable">
+        <!-- Position Column -->
+
+        <ng-container matColumnDef="agent.name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{element.Name}}</span> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="agent.description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> <span class="standartCell">{{element.Description}}</span> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="itemLinkDisplayColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: itemLinkDisplayColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of agents"
+                 class="mat-elevation-z2">
+    </mat-paginator>
+</div>
+<div mat-dialog-actions >
+    <button mat-button (click)="onAbortClick()" cdkFocusInitial>Abort</button>
+    <!--<button mat-button (click)="onOKClick()" [mat-dialog-close]="true">OK</button>-->
+</div>

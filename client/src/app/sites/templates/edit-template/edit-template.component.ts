@@ -15,6 +15,7 @@ import {
 import { Template } from "src/app/models/templates.model"
 import { AlertsService } from "src/app/services/alerts.service"
 import { TemplatesService } from "src/app/services/templates.service"
+import { LinkItemToTemplateComponent } from "../dialogs/link-item-to-template/link-item-to-template.component"
 
 @Component({
     selector: "app-edit-template",
@@ -67,5 +68,11 @@ export class EditTemplateComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.routeSub.unsubscribe()
+    }
+
+    linkItem() {
+        const dialogRef = this.dialog.open(LinkItemToTemplateComponent, {
+            width: "700px",
+        })
     }
 }
